@@ -1,0 +1,38 @@
+#wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../assets/brume.gif');
+    background-repeat: no-repeat;
+    background-size: cover;
+    gap:50px;
+  }
+  
+  #logo{
+    width: 300px;
+    height: 100px;
+    margin-top: 50px;
+  }
+  
+  #menu{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 1.8em;
+    color:#fff;
+  }
+  
+  #menu a{
+    color:#fff;
+  }
+  #menu :visited{
+    color:#fff;
+  }
+  #menu :hover{
+    color:#fff;
+  } 
