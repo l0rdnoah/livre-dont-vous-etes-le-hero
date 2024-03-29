@@ -2,6 +2,7 @@ import React from 'react';
 import logo from '../assets/logo_v1.png';
 import './menu.css';
 function Menu() {
+  document.title = "Menu Principal";
   return (
     <div id="menu">
       
