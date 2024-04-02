@@ -6,7 +6,7 @@ import BoutonChoix from './component/bouton_choix/bouton_choix.jsx';
 import HistoireBoite from './component/affichage_histoire/affichage_histoire.jsx';
 
 function App() {
-  // Définir des valeurs pour la vie actuelle et la vie maximale
+  // On met en dur pour le moment
   const vieActuelle = 200;
   const vieMax = 200;
   const enduranceActuelle = 400;
