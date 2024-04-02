@@ -11,7 +11,7 @@ function App() {
   const vieMax = 200;
   const enduranceActuelle = 400;
   const enduranceMax = 500;
-
+  const idSection = 1;
   return (
     <>
 
@@ -22,12 +22,12 @@ function App() {
     </div>
 
     <div className="conteneurBoutons">
-      <BoutonChoix />
-      <BoutonChoix />
+      <BoutonChoix idSection={idSection}/>
+      <BoutonChoix idSection={idSection}/>
     </div>
 
     <div className="text">
-      <HistoireBoite />
+      <HistoireBoite  />
     </div>
     </>
   )
