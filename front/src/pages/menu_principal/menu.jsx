@@ -12,6 +12,7 @@ function Menu() {
           <Link to="/Jeu">Jouer</Link>
           <Link to="/Charger">Charger</Link>
           <a href="#">Crédits</a>
+          <Link to="/">Se déconnecter</Link>
         </div>
       </div>
     </div>

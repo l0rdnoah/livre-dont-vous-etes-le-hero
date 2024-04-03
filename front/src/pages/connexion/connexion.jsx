@@ -11,7 +11,9 @@ function Connexion() {
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  sessionStorage.removeItem('id_utilisateur');
+
+  const connexion = async (e) => {
     e.preventDefault();
     
     // Objet contenant les données de l'utilisateur à envoyer
@@ -46,7 +48,7 @@ function Connexion() {
   return (
       <div id="wrapper">
         <img id="logo" src={logo} alt="" />
-        <form onSubmit={handleSubmit} id="form">
+        <form onSubmit={connexion} id="form">
           <div className="champ">
             <label>
               Email :

@@ -12,7 +12,7 @@ function Inscription() {
   const [password2, setPassword2] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = async (e) => {
+  const inscription = async (e) => {
     e.preventDefault();
 
     if (password !== password2) {
@@ -43,7 +43,7 @@ function Inscription() {
   return (
       <div id="wrapper">
         <img id="logo" src={logo} alt="" />
-        <form onSubmit={handleSubmit} id="form">
+        <form onSubmit={inscription} id="form">
           <div className="champ">
             <label>
               Email :
