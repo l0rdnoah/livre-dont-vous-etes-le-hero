@@ -1,18 +1,16 @@
 .conteneurBouton{
     background-color: rgb(42, 195, 58);
     max-width: 80vw;
-    width: 600px;
+    min-width: 50vw;
     height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 5px;
-    padding:4px;
+    padding:10px;
 }
 .conteneurBouton:hover{
     background-color: rgb(42, 165, 58);
-    max-width: 80vw;
-    width: 600px;
     height: 30px;
     display: flex;
     justify-content: center;
