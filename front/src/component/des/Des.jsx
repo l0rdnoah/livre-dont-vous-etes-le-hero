@@ -46,7 +46,7 @@ function Des({ nbdes = 2, boutonenabled = true, setresdes, setBoutonEnabled }) {
         <div className={`des`}>
             {diceRefs.map((ref, index) => (
                 <div key={index} className='des-unit'>
-                    <Dice ref={ref} onRoll={(value) => addSomme(value)} size={100} />
+                    <Dice ref={ref} onRoll={(value) => addSomme(value)} size={100} triggers={[]} />
                 </div>
             ))}
             <button disabled={!boutonenabled} onClick={rollAllDices}>Lancer les dés</button>

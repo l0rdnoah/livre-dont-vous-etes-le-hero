@@ -13,10 +13,8 @@
 }
 
 .inventaire-container{
-    background-image: url("../../assets/img/inventaire.webp");
-    background-position: center;
-    background-repeat: no-repeat;
-     background-size: 100% 100%;
+    background-image: url("../../assets/img/wood.png");
+    background-repeat: repeat;
     height: 80vh;
     width: 80%;
     max-width: 800px;
