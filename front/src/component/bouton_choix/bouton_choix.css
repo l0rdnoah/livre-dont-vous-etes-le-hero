@@ -2,7 +2,7 @@
     background-color: rgb(42, 195, 58);
     max-width: 80vw;
     min-width: 50vw;
-    height: 30px;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
