@@ -7,9 +7,15 @@ import HistoireBoite from './component/affichage_histoire/affichage_histoire.jsx
 import Enigme from './component/enigme/enigme.jsx';
 import { useLocation } from 'react-router-dom';
 import Combat from './component/sectionCombat/Combat.jsx';
+import Inventaire from './component/Inventaire/Inventaire.jsx';
 
 function App() {
   const [enduranceActuelle, setEnduranceActuelle] = useState(300);
+  const addEnduranceActuelle = (value) => {
+    console.log("end :",enduranceActuelle);
+    console.log("value :",value);
+    setEnduranceActuelle(enduranceActuelle+value);
+  };
   const [enduranceMax, setEnduranceMax] = useState(400);
   const [idSection, setIdSection] = useState('1'); // où le mec est rendu
   const [habilete, setHabilete] = useState(10);
@@ -60,18 +66,34 @@ function App() {
   useEffect(() => {
     if (enigme === 'enigme') {
       setEnigmeComponent(<Enigme />);
-    } else if (enigme === 'combat') {
-      setEnigmeComponent(<Combat modifTexte={setTexte} idCombat={allDataSection[0].Combats[0].id} enduranceJoueur={enduranceActuelle} updateEnduranceJoueur={(value) => {setEnduranceActuelle(enduranceActuelle + value)}}/>);
-    } 
+    }
     else {
       setEnigmeComponent(null); 
     }
   }, [enigme]);
 
+  if (enigme === 'combat') {
+    return (
+      <>
+        <div className="conteneurInfoJoueur">
+          <BarreEndurance enduranceActuelle={enduranceActuelle} enduranceMax={enduranceMax} />
+          <Inventaire />
+        </div>
+  
+        <Combat modifTexte={setTexte} idCombat={allDataSection[0].Combats[0].id} enduranceJoueur={enduranceActuelle} updateEnduranceJoueur={addEnduranceActuelle}/>
+  
+        <div className="text">
+          {texte ? <HistoireBoite texte={texte} /> : <p>Loading...</p>}
+        </div>
+      </>
+    );
+  }
+  else{
   return (
     <>
       <div className="conteneurInfoJoueur">
         <BarreEndurance enduranceActuelle={enduranceActuelle} enduranceMax={enduranceMax} />
+        <Inventaire />
       </div>
 
       <div className="conteneurBoutons">
@@ -87,6 +109,7 @@ function App() {
       </div>
     </>
   );
+        }
 }
 
 export default App;
