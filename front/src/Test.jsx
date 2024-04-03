@@ -4,6 +4,7 @@ import BarreVie from './component/barre_vie/barre_vie.jsx';
 import BarreEndurance from './component/barre_endurance/barre_endurance.jsx';
 import BoutonChoix from './component/bouton_choix/bouton_choix.jsx';
 import HistoireBoite from './component/affichage_histoire/affichage_histoire.jsx';
+import Combat from './component/sectionCombat/Combat.jsx';
 
 function App() {
   // On met en dur pour le moment
@@ -45,14 +46,7 @@ function App() {
       
     </div>
 
-    <div className="conteneurBoutons">
-      <BoutonChoix idSection={idSection}/>
-      <BoutonChoix idSection={idSection}/>
-    </div>
-
-    <div className="text">
-      <HistoireBoite  />
-    </div>
+    <Combat />
     </>
   )
 }
