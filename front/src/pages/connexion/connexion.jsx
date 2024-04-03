@@ -7,11 +7,39 @@ function Connexion() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Email:', email);
-    console.log('Password:', password);
-    // Ajoutez ici la logique de traitement de la connexion
+    
+    // Objet contenant les données de l'utilisateur à envoyer
+    const userData = {
+      email,
+      password,
+    };
+
+    try {
+      // Envoi de la requête POST à l'API de connexion
+      const response = await fetch('http://localhost:3000/api/connexion', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+
+      // Convertir la réponse en JSON
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log('Connexion réussie:', data);
+        // Gestion après la connexion réussie, par exemple redirection ou mise à jour de l'état
+      } else {
+        console.error('Erreur lors de la connexion:', data);
+        // Gestion de l'affichage d'un message d'erreur
+      }
+    } catch (error) {
+      console.error('Erreur lors de la connexion:', error);
+      // Gestion de l'affichage d'un message d'erreur réseau ou autre
+    }
   };
   return (
       <div id="wrapper">
