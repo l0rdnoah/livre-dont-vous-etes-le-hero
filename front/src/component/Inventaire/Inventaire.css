@@ -1,0 +1,16 @@
+.bouton-inventaire{
+    cursor: pointer;
+    background-image: url("../../assets/img/inventaire_icone.webp");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+}
+
+.inventaire{
+    min-width: 50px;
+    min-height: 50px;
+    max-width: 300px;
+    max-height: 300px;
+}
