@@ -7,8 +7,6 @@ import HistoireBoite from './component/affichage_histoire/affichage_histoire.jsx
 import { useLocation } from 'react-router-dom';
 
 function App() {
-  const [vieActuelle, setVieActuelle] = useState(100);
-  const [vieMax, setVieMax] = useState(200);
   const [enduranceActuelle, setEnduranceActuelle] = useState(300);
   const [enduranceMax, setEnduranceMax] = useState(400);
   const [idSection, setIdSection] = useState('1'); // où le mec est rendu
@@ -34,7 +32,7 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://217.182.9.237:3000/api/section/getallinfosectionbyid?idSection=${idSection}`);
+        const response = await fetch(`http://localhost:3000/api/section/getallinfosectionbyid?idSection=${idSection}`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -53,7 +51,6 @@ function App() {
   return (
     <>
       <div className="conteneurInfoJoueur">
-        <BarreVie vieActuelle={vieActuelle} vieMax={vieMax} />
         <BarreEndurance enduranceActuelle={enduranceActuelle} enduranceMax={enduranceMax} />
       </div>
 
