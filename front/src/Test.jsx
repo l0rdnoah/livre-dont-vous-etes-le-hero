@@ -46,7 +46,7 @@ function App() {
       
     </div>
 
-    <Combat />
+    <Combat enduranceJoueur={enduranceActuelle} updateEnduranceJoueur={addEnduranceActuelle}/>
     </>
   )
 }

@@ -4,7 +4,7 @@ import './Des.css';
 import PropTypes from 'prop-types';
 
 
-function Des({ nbdes = 2, boutonenabled = true, setresdes }) {
+function Des({ nbdes = 2, boutonenabled = true, setresdes, setBoutonEnabled }) {
 
     // Initialisation d'un état pour stocker les références des dés
     const [diceRefs, setDiceRefs] = useState([]);
@@ -22,6 +22,7 @@ function Des({ nbdes = 2, boutonenabled = true, setresdes }) {
     const rollAllDices = () => {
         desFini = 0
         somme = 0
+        setBoutonEnabled(false)
         diceRefs.forEach(ref => {
             if (ref.current) {
                 ref.current.rollDice();
@@ -33,6 +34,7 @@ function Des({ nbdes = 2, boutonenabled = true, setresdes }) {
         somme += value
         desFini++
         if (desFini === nbdes) {
+            setBoutonEnabled(true)
             setresdes(somme)
         }
     }
@@ -44,7 +46,7 @@ function Des({ nbdes = 2, boutonenabled = true, setresdes }) {
         <div className={`des`}>
             {diceRefs.map((ref, index) => (
                 <div key={index} className='des-unit'>
-                    <Dice ref={ref} onRoll={(value) => addSomme(value)} size={100} />
+                    <Dice ref={ref} onRoll={(value) => addSomme(value)} size={100} triggers={[]} />
                 </div>
             ))}
             <button disabled={!boutonenabled} onClick={rollAllDices}>Lancer les dés</button>
