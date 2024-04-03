@@ -1,10 +1,10 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Dice from 'react-dice-roll';
 import './Des.css';
+import PropTypes from 'prop-types';
 
-function Des(props) {
-    const nbdes = props.nbdes ? props.nbdes : 2;
-    console.log(`Nombre de dés: ${nbdes}`);
+
+function Des({ nbdes = 2, boutonenabled = true, setresdes }) {
 
     // Initialisation d'un état pour stocker les références des dés
     const [diceRefs, setDiceRefs] = useState([]);
@@ -14,7 +14,6 @@ function Des(props) {
         setDiceRefs((refs) => Array(nbdes).fill().map((_, i) => refs[i] || React.createRef()));
     }, [nbdes]);
 
-    console.log(diceRefs);
 
     var desFini = 0
     var somme = 0
@@ -34,9 +33,12 @@ function Des(props) {
         somme += value
         desFini++
         if (desFini === nbdes) {
-            console.log(`Somme des dés: ${somme}`);
+            setresdes(somme)
         }
     }
+
+
+
 
     return (
         <div className={`des`}>
@@ -45,7 +47,7 @@ function Des(props) {
                     <Dice ref={ref} onRoll={(value) => addSomme(value)} size={100} />
                 </div>
             ))}
-            <button onClick={rollAllDices}>Lancer les dés</button>
+            <button disabled={!boutonenabled} onClick={rollAllDices}>Lancer les dés</button>
         </div>
     );
 }
