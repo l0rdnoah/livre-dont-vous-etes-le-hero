@@ -10,7 +10,7 @@ function Menu() {
         <img id="logo" src={logo} alt="" />
         <div id="menu">
           <Link to="/Jeu">Jouer</Link>
-          <a href="#">Charger</a>
+          <Link to="/Charger">Charger</Link>
           <a href="#">Crédits</a>
         </div>
       </div>
