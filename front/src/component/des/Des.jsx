@@ -6,6 +6,11 @@ import PropTypes from 'prop-types';
 
 function Des({ nbdes = 2, boutonenabled = true, setresdes, setBoutonEnabled }) {
 
+    const [setBoutonEnabled, setBoutonEnabled] = useState(true);
+    const modifBoutonEnabled = (value) => {
+        setBoutonEnabled(value);
+    }
+
     // Initialisation d'un état pour stocker les références des dés
     const [diceRefs, setDiceRefs] = useState([]);
 
