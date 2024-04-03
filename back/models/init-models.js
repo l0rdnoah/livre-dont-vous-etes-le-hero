@@ -38,8 +38,8 @@ function initModels(sequelize) {
   Enemi.hasMany(Combat_Enemi, { as: "Combat_Enemis", foreignKey: "id_enemi"});
   Objet_Personnage.belongsTo(Objet, { as: "id_objet_Objet", foreignKey: "id_objet"});
   Objet.hasMany(Objet_Personnage, { as: "Objet_Personnages", foreignKey: "id_objet"});
-  Objet_Personnage.belongsTo(Objet_Personnage, { as: "id_personnage_Objet_Personnage", foreignKey: "id_personnage"});
-  Objet_Personnage.hasOne(Objet_Personnage, { as: "Objet_Personnage", foreignKey: "id_personnage"});
+  Objet_Personnage.belongsTo(Personnage, { as: "id_personnage_Personnage", foreignKey: "id_personnage"});
+  Personnage.hasMany(Objet_Personnage, { as: "Objet_Personnages", foreignKey: "id_personnage"});
   Choix.belongsTo(Section, { as: "section_arrivee_Section", foreignKey: "section_arrivee"});
   Section.hasMany(Choix, { as: "Choixes", foreignKey: "section_arrivee"});
   Choix.belongsTo(Section, { as: "section_depart_Section", foreignKey: "section_depart"});

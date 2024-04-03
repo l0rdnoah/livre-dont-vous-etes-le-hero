@@ -34,6 +34,10 @@ module.exports = function(sequelize, DataTypes) {
     prix: {
       type: DataTypes.INTEGER,
       allowNull: true
+    },
+    modif_piece: {
+      type: DataTypes.INTEGER,
+      allowNull: true
     }
   }, {
     sequelize,
