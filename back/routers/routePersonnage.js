@@ -4,6 +4,7 @@ const  personnage= require('../controllers/personnageController')
 
 
 router.get('/updatesectionpersonnagebyid', personnage.updateSectionPersonnageById);
+router.get('/creerpersonnage', personnage.creerPersonnage);
 
 
 module.exports=router
