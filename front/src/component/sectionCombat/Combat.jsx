@@ -53,13 +53,10 @@ function deroulementCombat(
   }
 }
 
-function Combat({ idCombat = 1, enduranceJoueur, updateEnduranceJoueur }) {
+function Combat({ idCombat = 1, enduranceJoueur, updateEnduranceJoueur, modifTexte }) {
   const [lancerPossible, setLancerPossible] = useState(true);
   const [resultatDes, setResultatDes] = useState(0);
   const [combatData, setCombatData] = useState({}); // Nouvel état pour stocker les données de combat
-  const [textehistoire, setTexte] = useState(
-    "Début du combat, préparez vous !!!"
-  );
   const [chargement, setChargement] = useState(true);
   const [enduranceAdversaire, setEnduranceAdversaire] = useState(1);
   const [sectionSuivante, setSectionSuivante] = useState(0);
@@ -69,10 +66,6 @@ function Combat({ idCombat = 1, enduranceJoueur, updateEnduranceJoueur }) {
     setEnduranceAdversaire(
       (prevEnduranceAdversaire) => prevEnduranceAdversaire + value
     );
-  }
-
-  function modifTexte(value) {
-    setTexte(value);
   }
 
   useEffect(() => {
@@ -131,15 +124,9 @@ function Combat({ idCombat = 1, enduranceJoueur, updateEnduranceJoueur }) {
         />
 
         <div className={`conteneurBoutons ${sectionSuivante >= 1 ? '' : 'nepasafficher'}`}>
-          <BoutonChoix idSection={sectionSuivante} />
+          <BoutonChoix idSection={sectionSuivante} texte="Continuer"/>
         </div>
         <div className={`divvide ${sectionSuivante >= 1 ? 'nepasafficher' : ''}`}></div>
-
-        <div className="text">
-          <HistoireBoite texte={textehistoire} />
-          {/* Exemple d'affichage des données de combat (ajustez selon votre besoin) */}
-          <p>{combatData.nomDuCombat}</p>
-        </div>
       </>
     );
   }

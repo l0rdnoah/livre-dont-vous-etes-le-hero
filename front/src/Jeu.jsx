@@ -6,6 +6,7 @@ import BoutonChoix from './component/bouton_choix/bouton_choix.jsx';
 import HistoireBoite from './component/affichage_histoire/affichage_histoire.jsx';
 import Enigme from './component/enigme/enigme.jsx';
 import { useLocation } from 'react-router-dom';
+import Combat from './component/sectionCombat/Combat.jsx';
 
 function App() {
   const [enduranceActuelle, setEnduranceActuelle] = useState(300);
@@ -17,6 +18,7 @@ function App() {
   const [choix, setChoix] = useState([]);
   const [enigme,setEnigme] = useState(false);
   const [enigmeComponent, setEnigmeComponent] = useState(null); // Variable pour stocker le composant enigme
+  const [allDataSection, setAllDataSection] = useState([]);
 
   // Utilisation du hook useLocation pour récupérer l'objet location de l'URL
   const location = useLocation();
@@ -41,6 +43,7 @@ function App() {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
+        setAllDataSection(data);
         setTexte(data[0]['texte']);
         setChoix(data[0]['section_depart_Choixes']);
         setEnigme(data[0]['type_choix']);
@@ -57,7 +60,10 @@ function App() {
   useEffect(() => {
     if (enigme === 'enigme') {
       setEnigmeComponent(<Enigme />);
-    } else {
+    } else if (enigme === 'combat') {
+      setEnigmeComponent(<Combat modifTexte={setTexte} idCombat={allDataSection[0].Combats[0].id} enduranceJoueur={enduranceActuelle} updateEnduranceJoueur={(value) => {setEnduranceActuelle(enduranceActuelle + value)}}/>);
+    } 
+    else {
       setEnigmeComponent(null); 
     }
   }, [enigme]);
