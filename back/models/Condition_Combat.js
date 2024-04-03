@@ -47,6 +47,15 @@ module.exports = function(sequelize, DataTypes) {
     sequelize,
     tableName: 'Condition_Combat',
     schema: 'public',
-    timestamps: false
+    timestamps: false,
+    indexes: [
+      {
+        name: "Condition_Combat_pkey",
+        unique: true,
+        fields: [
+          { name: "id" },
+        ]
+      },
+    ]
   });
 };
