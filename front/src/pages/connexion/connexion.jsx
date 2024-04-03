@@ -1,11 +1,15 @@
 import logo from '../../assets/logo_v1.png';
 import './connexion.css';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Connexion() {
   document.title = "Connexion";
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,7 +22,7 @@ function Connexion() {
 
     try {
       // Envoi de la requête POST à l'API de connexion
-      const response = await fetch('http://localhost:3000/api/connexion', {
+      const response = await fetch('http://localhost:3000/api/utilisateur/connexion', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -30,15 +34,13 @@ function Connexion() {
       const data = await response.json();
 
       if (response.ok) {
-        console.log('Connexion réussie:', data);
-        // Gestion après la connexion réussie, par exemple redirection ou mise à jour de l'état
-      } else {
-        console.error('Erreur lors de la connexion:', data);
-        // Gestion de l'affichage d'un message d'erreur
+        sessionStorage.setItem('id_utilisateur', data.userId);
+        navigate('/Menu');
       }
+
     } catch (error) {
       console.error('Erreur lors de la connexion:', error);
-      // Gestion de l'affichage d'un message d'erreur réseau ou autre
+      setErrorMessage('Erreur lors de la connexion.');
     }
   };
   return (
@@ -66,6 +68,12 @@ function Connexion() {
             />
           </div>
           <button type="submit">Se connecter</button>
+          <p>{errorMessage}</p> 
+          <div className='containerError'>
+            <Link to={`/Inscription`}>
+              <button>{"S'inscrire"}</button>
+            </Link>           
+          </div>
         </form>
       </div>
   );
