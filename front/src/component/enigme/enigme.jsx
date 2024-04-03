@@ -16,6 +16,7 @@ function Enigme() {
             // redirection à la section 9
             navigate("/Jeu?idSection=9");
         } else {
+            navigate("/Jeu?idSection=1");
             console.log("La réponse est incorrecte");
         }
     };
