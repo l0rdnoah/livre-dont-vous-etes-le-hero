@@ -6,11 +6,13 @@ const bodyParser = require('body-parser')
 //Routes
 const routeTest = require('./routers/routeTest.js')
 const routeSection = require('./routers/routeSection.js')
+const routeCombat = require('./routers/routeCombat.js')
 
 //
 
 app.use('/api/test', routeTest)
 app.use('/api/section', routeSection)
+app.use('/api/combat', routeCombat)
 
 
 
