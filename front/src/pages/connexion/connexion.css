@@ -1,0 +1,43 @@
+#wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../../assets/brume.gif');
+    background-repeat: no-repeat;
+    background-size: cover;
+    gap:50px;
+  }
+  
+  #logo{
+    width: 300px;
+    height: 100px;
+    margin-top: 50px;
+  }
+  
+ #form{
+  display: flex;
+  flex-direction: column;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 25px;
+  justify-content: stretch;
+ }
+
+ .champ{
+  margin: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+ }
+
+ button {
+    font-size: 25px;
+    margin: 15px;
+ }
+
+ .champ input{
+  margin-left: 12px;
+  height: 25px;
+ }
