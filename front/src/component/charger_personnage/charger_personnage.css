@@ -1,0 +1,27 @@
+.charger_personnage {
+    background-color: rgba(0, 0, 0, 0.1); /* noir avec 50% de transparence */
+    color: white;
+    width: 600px;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-bottom: 50px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+p {
+    font-size: medium;
+}
+
+.pieces_or {
+    width: 25px;
+    height: 25px;
+}
+
+.container_pieces_or {
+    display: flex;
+    align-items: center;
+}
