@@ -34,7 +34,7 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/api/section/getallinfosectionbyid?idSection=${idSection}`);
+        const response = await fetch(`http://217.182.9.237:3000/api/section/getallinfosectionbyid?idSection=${idSection}`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
