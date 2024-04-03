@@ -15,6 +15,7 @@ const routeTest = require('./routers/routeTest.js')
 const routeUtilisateur = require('./routers/routeUtilisateur.js')
 const routeSection = require('./routers/routeSection.js')
 const routeCombat = require('./routers/routeCombat.js')
+const routePersonnage = require('./routers/routePersonnage.js')
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -28,6 +29,7 @@ app.use('/api/utilisateur', routeUtilisateur)
 app.use('/api/test', routeTest)
 app.use('/api/section', routeSection)
 app.use('/api/combat', routeCombat)
+app.use('/api/personnage', routePersonnage)
 
 app.listen(PORT)
 console.log("Serveur Web prêt...")

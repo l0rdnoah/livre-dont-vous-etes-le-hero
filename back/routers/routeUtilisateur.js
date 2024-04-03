@@ -4,7 +4,7 @@ const  test= require('../controllers/UtilisateurController')
 
 router.post('/inscription', test.inscription);
 
-router.get('/utilisateur/:id/personnages', test.personnages)
+router.get('/:id/personnages', test.personnages)
 
 router.post('/connexion', test.connexion)
 
