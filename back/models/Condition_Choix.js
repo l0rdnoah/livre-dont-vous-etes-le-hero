@@ -38,11 +38,28 @@ module.exports = function(sequelize, DataTypes) {
     endurance_max: {
       type: DataTypes.BOOLEAN,
       allowNull: true
+    },
+    modif_endurance: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    modif_habilite: {
+      type: DataTypes.INTEGER,
+      allowNull: true
     }
   }, {
     sequelize,
     tableName: 'Condition_Choix',
     schema: 'public',
-    timestamps: false
+    timestamps: false,
+    indexes: [
+      {
+        name: "Condition_Choix_pkey",
+        unique: true,
+        fields: [
+          { name: "id" },
+        ]
+      },
+    ]
   });
 };

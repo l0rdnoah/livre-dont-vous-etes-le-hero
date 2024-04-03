@@ -3,10 +3,19 @@ const PORT=3000
 const app = express()
 const bodyParser = require('body-parser')
 
+const cors = require('cors');
+app.use(cors({
+  origin: 'http://localhost:5173' // Autorise les requêtes de votre app React
+}));
+
+app.use(bodyParser.json())
+
 //Routes
 const routeTest = require('./routers/routeTest.js')
+const routeUtilisateur = require('./routers/routeUtilisateur.js')
 const routeSection = require('./routers/routeSection.js')
 const routeCombat = require('./routers/routeCombat.js')
+const routePersonnage = require('./routers/routePersonnage.js')
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -16,12 +25,11 @@ app.use((req, res, next) => {
   });
   
 
+app.use('/api/utilisateur', routeUtilisateur)
 app.use('/api/test', routeTest)
 app.use('/api/section', routeSection)
 app.use('/api/combat', routeCombat)
+app.use('/api/personnage', routePersonnage)
 
-
-
-app.use(bodyParser.json())
 app.listen(PORT)
 console.log("Serveur Web prêt...")
