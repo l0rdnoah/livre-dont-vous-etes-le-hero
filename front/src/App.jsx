@@ -1,21 +1,19 @@
-  import { useState } from 'react'
-  import './App.css'
-  import Menu from './component/menu_principal/menu.jsx';
-  import BarreVie from './component/barre_vie/barre_vie.jsx';
-  import Inventaire from './component/Inventaire/Inventaire.jsx';
-  import Des from './component/des/Des.jsx';
+import React from 'react';
+import './App.css';
+import Menu from './component/menu_principal/menu.jsx';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Jeu from './Jeu.jsx';
 
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Menu />} />
+        <Route path="/Jeu" element={<Jeu />} />
+        {/* Ajoutez d'autres routes si nécessaire */}
+      </Routes>
+    </BrowserRouter>
+  );
+}
 
-  function App() {
-  
-    return (
-      <>
-        {/* <Menu /> */}
-        <BarreVie />
-        {/* <Des nbdes={2} /> */}
-        {/* <Inventaire /> */}
-      </>
-    )
-  }
-
-  export default App
+export default App;
