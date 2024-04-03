@@ -42,3 +42,9 @@
   margin-left: 12px;
   height: 25px;
  }
+
+ .containerError {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+ }
