@@ -78,7 +78,7 @@ exports.creerPersonnage = async (req, res) => {
             id_objet: 4 //Gourde d'eau
         })
 
-        res.status(200).json({message: 'Personnage créé avec succès'})
+        res.status(200).json({message: 'Personnage créé avec succès', personnageId : personnage.id})
     }
     catch(error){
         console.log('erreur lors de creerPersonnage: '+error)
