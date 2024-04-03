@@ -86,3 +86,22 @@ exports.creerPersonnage = async (req, res) => {
     }
 
 }
+
+exports.getPersonnageById = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const personnage = await models.Personnage.findByPk(id, {
+            attributes: { exclude: ['createdAt', 'updatedAt'] } // Excluez ou incluez des attributs selon les besoins
+        });
+
+        if (!personnage) {
+            return res.status(404).send('Personnage not found');
+        }
+
+        res.json(personnage);
+    } catch (error) {
+        console.error('Error fetching character:', error);
+        res.status(500).send('Server error');
+    }
+};
