@@ -6,6 +6,7 @@
     height: 100vh;   
     top: 0;
     left: 0;
+    z-index: 50;
 }
 
 .i-ferme{
@@ -76,4 +77,16 @@
     cursor: pointer;
     margin-right: 5px;
     padding: 5px;
+}
+
+@media screen and (max-width: 800px){
+    .item{
+        width: 90px;
+        height: 90px;
+    }
+
+    .items-container{
+        margin: 10px;
+    }
+    
 }

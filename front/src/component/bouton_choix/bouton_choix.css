@@ -21,6 +21,30 @@
 .conteneurBouton{
     color:white;
 }
+
+.conteneurBoutonDesactive{
+    background-color: gray;
+    max-width: 80vw;
+    min-width: 50vw;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    padding:10px;
+}
+.conteneurBoutonDesactive:hover{
+    background-color: gray;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.conteneurBoutonDesactive{
+    color:white;
+}
 .lien{
     color:#fff;
 }
