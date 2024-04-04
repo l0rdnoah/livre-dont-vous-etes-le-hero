@@ -14,7 +14,13 @@ function App() {
   const addEnduranceActuelle = (value) => {
     console.log("end :",enduranceActuelle);
     console.log("value :",value);
-    setEnduranceActuelle(enduranceActuelle+value);
+    if (enduranceActuelle+value < 0) {
+      setEnduranceActuelle(0);
+    } else if (enduranceActuelle+value > enduranceMax) {
+      setEnduranceActuelle(enduranceMax);
+    } else{
+      setEnduranceActuelle(enduranceActuelle+value);
+    }
   };
   const [enduranceMax, setEnduranceMax] = useState(400);
   const [idSection, setIdSection] = useState('1'); // où le mec est rendu
@@ -28,6 +34,22 @@ function App() {
   const [inventaire, setInventaire] = useState([]); 
   const [idPerso, setIdPerso] = useState(0);
   const [url,setImage] = useState('');
+  const [bonusDes, setBonusDes] = useState(0);
+  const [bonusDegats, setBonusDegats] = useState(0);
+  const [bonusHabilete, setBonusHabilete] = useState(0);
+
+  const addBonusDes = (value) => {
+    setBonusDes(bonusDes + value);
+  }
+
+  const addBonusDegat = (value) => {
+    setBonusDegats(bonusDegats + value);
+  }
+
+  const addBonusHabilite = (value) => {
+    setBonusHabilete(bonusHabilete + value);
+  }
+
 
   // Utilisation du hook useLocation pour récupérer l'objet location de l'URL
   const location = useLocation();
@@ -91,8 +113,6 @@ function App() {
       }
       const data = await response.json();
       setInventaire(data);
-      console.log("inventaire :");
-      console.log(data);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -100,7 +120,7 @@ function App() {
 
 
   // fonction pour ajouter un objet dans l'inventaire et mettre à jour la bdd
-  const addObjetBDD = async (idObjet) => {
+  const addObjet = async (idObjet) => {
     try {
       const response = await fetch(`http://localhost:3200/api/objetPersonnage/addObjetToPersonnage?idObjet=${idObjet}&idPersonnage=${idPerso}`);
       if (!response.ok) {
@@ -112,13 +132,15 @@ function App() {
   };
 
   // fonction pour enlever un objet dans l'inventaire et mettre à jour la bdd
-  const removeObjetBDD = async (idObjet) => {
+  const removeObjet = async (idObjet) => {
     try {
       const response = await fetch(`http://localhost:3200/api/objetPersonnage/deleteObjetFromPersonnage?idObjet=${idObjet}&idPersonnage=${idPerso}`);
+      setInventaire(inventaire.filter(objet => objet.id !== idObjet));
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-    } catch (error) {
+    }
+    catch (error) {
       console.error('Error fetching data:', error);
     }
   };
@@ -165,7 +187,7 @@ function App() {
       <>
         <div className="conteneurInfoJoueur">
           <BarreEndurance enduranceActuelle={enduranceActuelle} enduranceMax={enduranceMax} />
-          <Inventaire items={inventaire} />
+          <Inventaire items={inventaire} addBonusDegat={addBonusDegat} addBonusHabilite={addBonusHabilite} addBonusDes={addBonusDes} addEndurance={addEnduranceActuelle} removeItem={removeObjet}/>
         </div>
   
         <Combat modifTexte={setTexte} idCombat={allDataSection[0].Combats[0].id} enduranceJoueur={enduranceActuelle} updateEnduranceJoueur={addEnduranceActuelle}/>
@@ -181,7 +203,7 @@ function App() {
     <>
       <div className="conteneurInfoJoueur">
         <BarreEndurance enduranceActuelle={enduranceActuelle} enduranceMax={enduranceMax} />
-        <Inventaire items={inventaire} />
+        <Inventaire items={inventaire} addBonusDegat={addBonusDegat} addBonusHabilite={addBonusHabilite} addBonusDes={addBonusDes} addEndurance={addEnduranceActuelle} removeItem={removeObjet}/>
       </div>
 
       <div className="conteneurBoutons">

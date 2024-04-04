@@ -1,18 +1,58 @@
 import React, { useState, useEffect } from "react";
 import "./PopUpInventaire.css";
+import ContextMenu from "../ContextMenu/ContextMenu.jsx";
+
+
 
 const getImage = async (id) => {
   const image = await import(`../../assets/img/itemsInventaire/${id}.png`);
   return image.default;
 };
 
-const PopUpInventaire = (props) => {
+const PopUpInventaire = ({items, ouvert, onFermer, addEndurance, addBonusDes, addBonusDegat, addBonusHabilite, removeItem}) => {
   const [imageUrls, setImageUrls] = useState({});
+  const [contextMenu, setContextMenu] = useState(null);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+
+
+  const utiliserItem = async (id) => {
+    var item = items.find((item) => item.id === id);
+    console.log("Utilisation de l'item : " + item.nom);
+    if (item.type === "potion") {
+      if (item.modif_habilite !== null) {
+        addBonusHabilite(item.modif_habilite);
+      }
+      if (item.modif_endurance!== null) {
+        addEndurance(item.modif_endurance);
+      }
+      if (item.modif_des!== null) {
+        addBonusDes(item.modif_des);
+      }
+      if (item.modif_degats!== null) {
+        addBonusDegat(item.modif_degats);
+      }
+      removeItem(id);
+    }
+  }
+
+  const handleRightClick = (event, item) => {
+    event.preventDefault();
+    if (item.type === "potion") {
+      setPosition({ x: event.pageX, y: event.pageY });
+      setContextMenu(item.id); // Set the context menu for the specific item
+    }
+  };
+
+  const handleCloseContextMenu = () => {
+    setContextMenu(null);
+  };
+
+
 
   useEffect(() => {
     const loadImageUrls = async () => {
       const urls = await Promise.all(
-        props.items.map(async (item) => ({
+        items.map(async (item) => ({
           id: item.id,
           url: await getImage(item.id),
         }))
@@ -27,15 +67,20 @@ const PopUpInventaire = (props) => {
     };
 
     loadImageUrls();
-  }, [props.items]);
+  }, [items]);
 
   const fermer = () => {
-    props.onFermer();
+    setContextMenu(null);
+    onFermer();
   };
+
+  const contextMenuActions = [
+    ["Utiliser", utiliserItem],
+  ];
 
   return (
     <div
-      className={`inventaire-popup ${props.ouvert ? "i-ouvert" : "i-ferme"}`}
+      className={`inventaire-popup ${ouvert ? "i-ouvert" : "i-ferme"}`}
     >
       <div className="inventaire-container">
         <div className="topbarre">
@@ -55,8 +100,8 @@ const PopUpInventaire = (props) => {
           </div>
         </div>
         <div className="items-container">
-          {props.items.map((item, index) => (
-            <div className="item" key={index}>
+          {items.map((item, index) => (
+            <div className="item" key={index} onContextMenu={(e) => handleRightClick(e, item)}>
               <img
                 className="img-item"
                 src={imageUrls[item.id]}
@@ -69,6 +114,7 @@ const PopUpInventaire = (props) => {
           ))}
         </div>
       </div>
+      {contextMenu && <ContextMenu items={contextMenuActions} position={position} iditem={contextMenu} onClose={handleCloseContextMenu}/>}
     </div>
   );
 };

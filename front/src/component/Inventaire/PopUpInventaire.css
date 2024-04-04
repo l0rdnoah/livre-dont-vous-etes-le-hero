@@ -77,3 +77,15 @@
     margin-right: 5px;
     padding: 5px;
 }
+
+@media screen and (max-width: 800px){
+    .item{
+        width: 90px;
+        height: 90px;
+    }
+
+    .items-container{
+        margin: 10px;
+    }
+    
+}

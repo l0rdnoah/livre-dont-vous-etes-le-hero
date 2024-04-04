@@ -4,56 +4,7 @@ import PopUpInventaire from "./PopUpInventaire.jsx";
 import PropTypes from 'prop-types';
 
 
-function Inventaire({items = [
-  {
-    nom: "Elixir de Force",
-    type: "consommable",
-    modif_habilite: 3,
-    modif_endurance: 2,
-    modif_des: null,
-    modif_degats: 5,
-  },
-  {
-    nom: "Pierre de Sagesse",
-    type: "passif",
-    modif_habilite: 1,
-    modif_endurance: -1,
-    modif_des: 2,
-    modif_degats: 3,
-  },
-  {
-    nom: "Breuvage du Berserker",
-    type: "consommable",
-    modif_habilite: 2,
-    modif_endurance: 5,
-    modif_des: null,
-    modif_degats: 7,
-  },
-  {
-    nom: "Amulette de Protection",
-    type: "passif",
-    modif_habilite: -2,
-    modif_endurance: 3,
-    modif_des: 1,
-    modif_degats: 1,
-  },
-  {
-    nom: "Gantelet du Pouvoir",
-    type: "consommable",
-    modif_habilite: 4,
-    modif_endurance: -3,
-    modif_des: null,
-    modif_degats: 6,
-  },
-  {
-    nom: "Cape de l'Invisible",
-    type: "passif",
-    modif_habilite: 0,
-    modif_endurance: 2,
-    modif_des: 5,
-    modif_degats: 0,
-  },
-]}) {
+function Inventaire({items, addEndurance, addBonusDes, addBonusDegat, addBonusHabilite, removeItem}) {
   const [inventaireOuvert, setInventaireOuvert] = useState(false);
 
   const updateInventaireOuvert = () => {
@@ -74,7 +25,12 @@ function Inventaire({items = [
       <PopUpInventaire 
       items={items}
       ouvert={inventaireOuvert}
-      onFermer={updateInventaireOuvert}/>
+      onFermer={updateInventaireOuvert}
+      addEndurance={addEndurance}
+      addBonusDes={addBonusDes}
+      addBonusDegat={addBonusDegat}
+      addBonusHabilite={addBonusHabilite}
+      removeItem={removeItem}/>
       </div>
   );
 }
