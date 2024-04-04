@@ -51,7 +51,7 @@ exports.creerPersonnage = async (req, res) => {
             endurance,
             po,
             modif_degats,
-            'endurance_max ': endurance_max // dans le model cette colonne est avec des '' car il y a un espace à la fin
+            endurance_max // dans le model cette colonne est avec des '' car il y a un espace à la fin
         })
 
         console.log('personnage créé: '+personnage)
