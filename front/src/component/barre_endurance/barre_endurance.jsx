@@ -1,18 +1,22 @@
 import React from 'react';
-import './barre_endurance.css';
 
-function Barre({ enduranceActuelle, enduranceMax }) {
-    return (
-        <>
-        <div className="conteneurBarreEndurance">
-        <p className="valeurEndurance">{enduranceActuelle}/{enduranceMax}</p>    
-        <div className="endurance" style={{ width: enduranceMax }}>
-            <div className="remplissageEndurance" style={{ width: (enduranceActuelle / enduranceMax) * 200 }}>
-            </div>
-        </div>
-        </div>
-        </>
-    );
-}
+const BarreDeVie = ({ enduranceMax, enduranceActuelle, taille=350 }) => {
+  // Calcul du pourcentage de vie actuelle par rapport à la vie maximale
+  const pourcentageVie = (enduranceActuelle / enduranceMax) * 100;
 
-export default Barre;
+  return (
+    <div style={{ width: `${taille}px`}}>
+      <div
+        style={{
+          backgroundColor: 'green',
+          width: `${pourcentageVie}%`,
+          height: '20px',
+          borderRadius: '5px',
+          textAlign: 'center'
+        }}
+      >{enduranceActuelle} / {enduranceMax}</div>
+    </div>
+  );
+};
+
+export default BarreDeVie;

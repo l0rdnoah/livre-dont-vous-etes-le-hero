@@ -46,3 +46,14 @@
     margin-left: 12px;
     height: 25px;
 }
+
+.container_des {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container_bouton {
+  display: flex;
+  justify-content: center;
+}
