@@ -50,6 +50,9 @@ function App() {
     setBonusHabilete(bonusHabilete + value);
   }
 
+  
+
+
 
   // Utilisation du hook useLocation pour récupérer l'objet location de l'URL
   const location = useLocation();
