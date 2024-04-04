@@ -10,7 +10,7 @@ import sword from "../../assets/img/combat/sword.gif";
 async function getCombat(idCombat) {
   try {
     const response = await fetch(
-      `http://localhost:3000/api/combat/getallinfocombatbyid?idCombat=${idCombat}`
+      `http://localhost:3200/api/combat/getallinfocombatbyid?idCombat=${idCombat}`
     );
     const combat = await response.json();
     return combat;

@@ -5,6 +5,7 @@ import PiecesOr from "../../assets/img/pieces_or.png";
 
 
 function ChargerPersonnage({personnage}) {
+    sessionStorage.setItem('id_personnage', personnage.id);
     return (
         <>  
             <Link to={`/Jeu?idSection=${personnage.section_actuelle}&idPersonnage=${personnage.id}`}>
