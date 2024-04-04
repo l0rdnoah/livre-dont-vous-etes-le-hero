@@ -64,15 +64,17 @@ function App() {
 
     // Effectuer le fetch si l'idSection a changé
     if (id !== idSection) {
-      fetchData(id);
       setIdSection(id);
       setEnigme(searchParams.get('type_choix'));
     }
+    fetchData(id);
+
   }, [location.search, idSection]);
 
 
     const fetchData = async (id) => {
       try {
+        console.log("dz")
         const response = await fetch(`http://localhost:3200/api/section/getallinfosectionbyid?idSection=${id}`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
