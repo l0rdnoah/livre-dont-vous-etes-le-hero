@@ -24,7 +24,7 @@ function App() {
   };
   const [enduranceMax, setEnduranceMax] = useState(25);
   const [idSection, setIdSection] = useState('1'); // où le mec est rendu
-  const [habilete, setHabilete] = useState(10);
+  const [habilete, setHabilete] = useState(5);
   const [typeSection, setTypeSection] = useState("combat");
   const [texte, setTexte] = useState('');
   const [choix, setChoix] = useState([]);
@@ -72,24 +72,64 @@ function App() {
   }, [location.search, idSection]);
 
 
-    const fetchData = async (id) => {
-      try {
-        console.log("dz")
-        const response = await fetch(`http://localhost:3200/api/section/getallinfosectionbyid?idSection=${id}`);
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        setAllDataSection(data);
-        setTexte(data[0]['texte']);
-        setChoix(data[0]['section_depart_Choixes']);
-        setEnigme(data[0]['type_choix']);
-        setImage(data[0]['url']);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        setTexte("Erreur de chargement de l'histoire");
+  const fetchData = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:3200/api/section/getallinfosectionbyid?idSection=${id}`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
       }
-    };
+      const data = await response.json();
+
+
+      var section_depart_Choixes = data[0]['section_depart_Choixes'];
+
+      for (let i = 0; i < section_depart_Choixes.length; i++) {
+        if (section_depart_Choixes[i]['Condition_Choixes'].length !== 0 ){
+          console.log(section_depart_Choixes[i]['Condition_Choixes'][0])
+          
+          if (section_depart_Choixes[i]['Condition_Choixes'][0]['min_habilite']){
+            if (section_depart_Choixes[i]['Condition_Choixes'][0]['min_habilite'] <= habilete){
+              section_depart_Choixes[i]['respect'] = true;
+            }else{
+              section_depart_Choixes[i]['respect'] = false;
+            }
+          }
+
+          if (section_depart_Choixes[i]['Condition_Choixes'][0]['objet_requis']){
+            if (section_depart_Choixes[i]['Condition_Choixes'][0]['objet_requis'] === inventaire.find(inventaire.find(objet => objet.id === section_depart_Choixes[i]['Condition_Choixes'][0]['objet_requis']).nom)){
+              section_depart_Choixes[i]['respect'] = true;
+            }else{
+              section_depart_Choixes[i]['respect'] = false;
+            }
+          }
+
+          if (section_depart_Choixes[i]['Condition_Choixes'][0]['modif_endurance']){
+            addEnduranceActuelle(section_depart_Choixes[i]['Condition_Choixes'][0]['modif_endurance'])
+            section_depart_Choixes[i]['respect'] = true;
+          }
+
+          if (section_depart_Choixes[i]['Condition_Choixes'][0]['endurance_max']){
+            setEnduranceActuelle(enduranceMax)
+            section_depart_Choixes[i]['respect'] = true;
+          }
+
+        }
+        else {
+          section_depart_Choixes[i]['respect'] = true;
+        }
+      }
+      console.log(section_depart_Choixes)
+
+      setAllDataSection(data);
+      setTexte(data[0]['texte']);
+      setChoix(section_depart_Choixes);
+      setEnigme(data[0]['type_choix']);
+      setImage(data[0]['url']);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setTexte("Erreur de chargement de l'histoire");
+    }
+  };
   
   useEffect(() => {
     const updateSectionPersonnage = async () => {
@@ -121,6 +161,20 @@ function App() {
     }
   };
 
+  const fetchPersonnage = async (perso) => {
+    try {
+      const response = await fetch(`http://localhost:3200/api/personnage/${perso}/getPersonnageById`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      setHabilete(data.habilete);
+      setEnduranceActuelle(data.endurance);
+      setEnduranceMax(data.endurance_max);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
   // fonction pour ajouter un objet dans l'inventaire et mettre à jour la bdd
   const addObjet = async (idObjet) => {
@@ -153,6 +207,7 @@ function App() {
     const perso = (JSON.parse(sessionStorage.getItem('id_personnage')));
     setIdPerso(perso);
     fetchInventaire(perso);
+    fetchPersonnage(perso);
   }, []);
 
 
@@ -210,7 +265,7 @@ function App() {
 
       <div className="conteneurBoutons">
         {choix.map((choixItem, index) => (
-          <BoutonChoix key={index} idSection={choixItem.section_arrivee} texte={choixItem.texte} />
+          <BoutonChoix key={index} idSection={choixItem.section_arrivee} texte={choixItem.texte} respect={choixItem.respect}/>
         ))}
         
         {enigmeComponent} {/* Afficher le composant enigme ici */}
