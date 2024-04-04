@@ -93,15 +93,17 @@ function App() {
 
     // Effectuer le fetch si l'idSection a changé
     if (id !== idSection) {
-      fetchData(id);
       setIdSection(id);
       setEnigme(searchParams.get('type_choix'));
     }
+    fetchData(id);
+
   }, [location.search, idSection]);
 
 
     const fetchData = async (id) => {
       try {
+        console.log("dz")
         const response = await fetch(`http://localhost:3200/api/section/getallinfosectionbyid?idSection=${id}`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -205,7 +207,7 @@ function App() {
   }, [enigme]);
 
   useEffect(() => {
-    // Appliquer le style au body lors du montage du composant
+    
     const originalStyle = window.getComputedStyle(document.body).background;
     document.body.style.backgroundImage = `url(${url})`;
     document.body.style.backgroundSize = 'cover';
@@ -213,9 +215,8 @@ function App() {
     document.body.style.backgroundRepeat = 'no-repeat';
     document.body.style.minHeight = '100vh';
     document.body.style.width = '100%';
-    document.body.style.margin = '0'; // Enlever la marge par défaut du body, si nécessaire
+    document.body.style.margin = '0'; 
 
-    // Rétablir le style original lors du démontage du composant
     return () => {
       document.body.style.background = originalStyle;
     };
