@@ -98,7 +98,7 @@ function App() {
     }
     fetchData(id);
 
-  }, [location.search, idSection]);
+  }, [location.search]);
 
 
     const fetchData = async (id) => {
@@ -139,7 +139,7 @@ function App() {
   useEffect(() => {
     console.log("alldatesection",allDataSection);
     if (allDataSection.length > 0){
-      if (allDataSection[0].objet_recup !== null) {
+      if (allDataSection[0].objet_recup !== null && inventaire.find(objet => objet.id === allDataSection[0].objet_recup) === undefined){
         addObjet(allDataSection[0].objet_recup);
       }
     }

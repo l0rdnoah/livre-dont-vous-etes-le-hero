@@ -18,7 +18,7 @@ const PopUpInventaire = ({items, ouvert, onFermer, addEndurance, addBonusDes, ad
   const utiliserItem = async (id) => {
     var item = items.find((item) => item.id === id);
     console.log("Utilisation de l'item : " + item.nom);
-    if (item.type === "potion") {
+    if (item.type === "consommable") {
       if (item.modif_habilite !== null) {
         addBonusHabilite(item.modif_habilite);
       }

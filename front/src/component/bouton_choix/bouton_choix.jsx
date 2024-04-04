@@ -1,7 +1,15 @@
 import React from 'react';
 import './bouton_choix.css';
 import { Link } from 'react-router-dom';
-function BoutonChoix({ idSection, texte, respect = true }) {
+function BoutonChoix({ idSection, texte, respect = true, url }) {
+
+  if (url) {
+    <div className="conteneurBouton">
+      <Link to={url} className="lien">
+      {texte}
+      </Link>
+    </div>
+  }
     return (
       <>
         {respect ? (
