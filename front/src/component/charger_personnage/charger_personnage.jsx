@@ -7,7 +7,7 @@ import PiecesOr from "../../assets/img/pieces_or.png";
 function ChargerPersonnage({personnage}) {
     return (
         <>  
-            <Link to={`/Jeu?idSection=${personnage.section_actuelle}?idPersonnage=${personnage.id}`}>
+            <Link to={`/Jeu?idSection=${personnage.section_actuelle}&idPersonnage=${personnage.id}`}>
                 <div className='charger_personnage'>
                     <div className='container'>
                         <p>{personnage.nom}</p>
