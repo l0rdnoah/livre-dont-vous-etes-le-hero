@@ -37,7 +37,7 @@ const PopUpInventaire = ({items, ouvert, onFermer, addEndurance, addBonusDes, ad
 
   const handleRightClick = (event, item) => {
     event.preventDefault();
-    if (item.type === "potion") {
+    if (item.type === "consommable") {
       setPosition({ x: event.pageX, y: event.pageY });
       setContextMenu(item.id); // Set the context menu for the specific item
     }

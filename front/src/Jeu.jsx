@@ -26,6 +26,7 @@ function App() {
   const [idSection, setIdSection] = useState('1'); // où le mec est rendu
   const [habilete, setHabilete] = useState(10);
   const [typeSection, setTypeSection] = useState("combat");
+  const [pieces, setPieces] = useState(0);
   const [texte, setTexte] = useState('');
   const [choix, setChoix] = useState([]);
   const [enigme,setEnigme] = useState(false);
@@ -49,6 +50,34 @@ function App() {
   const addBonusHabilite = (value) => {
     setBonusHabilete(bonusHabilete + value);
   }
+
+  const addPiece = (value) => {
+    setPieces(pieces + value);
+  }
+
+
+  const addBonusItem = (idObjet) => {
+    const item = inventaire.find(objet => objet.id === idObjet);
+    if (item.type === "equipement"){
+      if (item.modif_des) {
+        addBonusDes(item.modif_des);
+      }
+      if (item.modif_degats) {
+        addBonusDegat(item.modif_degats);
+      }
+      if (item.modif_habilite) {
+        addBonusHabilite(item.modif_habilite);
+      }
+    } else if (item.type === "piece") {
+      if (item.modif_piece) {
+        addPiece(item.modif_piece);
+      } 
+      removeObjet(idObjet);
+    }
+  }
+
+
+
 
   
 
@@ -102,9 +131,17 @@ function App() {
         console.error('Error updating section personnage:', error);
       }
     };
-
     updateSectionPersonnage();
   }, [idSection]);
+
+  useEffect(() => {
+    console.log("alldatesection",allDataSection);
+    if (allDataSection.length > 0){
+      if (allDataSection[0].objet_recup !== null) {
+        addObjet(allDataSection[0].objet_recup);
+      }
+    }
+  }, [allDataSection]);
 
   const fetchInventaire = async (perso) => {
     try {
@@ -127,6 +164,8 @@ function App() {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
+      fetchInventaire(idPerso);
+      addBonusItem(idObjet);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
