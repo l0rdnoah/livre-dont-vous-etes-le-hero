@@ -24,7 +24,7 @@ function Connexion() {
 
     try {
       // Envoi de la requête POST à l'API de connexion
-      const response = await fetch('http://localhost:3000/api/utilisateur/connexion', {
+      const response = await fetch('http://localhost:3200/api/utilisateur/connexion', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

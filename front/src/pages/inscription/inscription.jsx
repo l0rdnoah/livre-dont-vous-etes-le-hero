@@ -21,7 +21,7 @@ function Inscription() {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/api/utilisateur/inscription', {
+      const response = await fetch('http://localhost:3200/api/utilisateur/inscription', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

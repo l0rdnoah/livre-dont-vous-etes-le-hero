@@ -15,7 +15,7 @@ function Charger() {
     const fetchData = async () => {
       try {
         const id_utilisateur = sessionStorage.getItem('id_utilisateur');
-        const response = await fetch(`http://localhost:3000/api/utilisateur/${id_utilisateur}/personnages`);
+        const response = await fetch(`http://localhost:3200/api/utilisateur/${id_utilisateur}/personnages`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }

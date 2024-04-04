@@ -45,7 +45,7 @@ function CreationPersonnage() {
         });
 
         try {
-            const response = await fetch(`http://localhost:3000/api/personnage/creerpersonnage?${params.toString()}`);
+            const response = await fetch(`http://localhost:3200/api/personnage/creerpersonnage?${params.toString()}`);
             const data = await response.json();
 
             if (response.ok) {
