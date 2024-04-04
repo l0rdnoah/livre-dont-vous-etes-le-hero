@@ -12,7 +12,7 @@ exports.getObjetsByPersonnageId = async (req, res) => {
             where: { id_personnage: id },
             include: [{
                 model: models.Objet,
-                as: 'id_objet_Objet', // Assurez-vous que cet alias correspond à celui défini dans vos associations
+                as: 'id_objet_Objet', 
                 attributes: { exclude: ['createdAt', 'updatedAt'] }
             }]
         });
@@ -21,12 +21,11 @@ exports.getObjetsByPersonnageId = async (req, res) => {
             return res.status(404).send('Objets not found for this personnage');
         }
 
-        // Afficher les résultats pour vérification
+        
         console.log(objets);
 
-        // La logique pour extraire les objets correctement dépend de la structure de vos données
-        // Assurez-vous que vous accédez aux données de la manière appropriée
-        const objetsList = objets.map(item => item.id_objet_Objet); // Ajustez selon la structure réelle
+
+        const objetsList = objets.map(item => item.id_objet_Objet); 
 
         return res.json(objetsList);
       

@@ -92,7 +92,7 @@ exports.getPersonnageById = async (req, res) => {
 
     try {
         const personnage = await models.Personnage.findByPk(id, {
-            attributes: { exclude: ['createdAt', 'updatedAt'] } // Excluez ou incluez des attributs selon les besoins
+            attributes: { exclude: ['createdAt', 'updatedAt'] } 
         });
 
         if (!personnage) {
