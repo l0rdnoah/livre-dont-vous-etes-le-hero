@@ -37,3 +37,21 @@ exports.getObjetsByPersonnageId = async (req, res) => {
     
     
 };
+
+
+exports.getAllInfoObjetById = async (req, res) => {
+    const idObjet= req.query.idObjet;
+
+    try{
+        const reponse= await models.Objet.findByPk(idObjet, {
+            attributes: { exclude: ['createdAt', 'updatedAt'] }
+        });
+
+        return res.json(reponse);
+
+    }
+    catch(error){
+        console.log('erreur lors de getAllInfoObjetById: '+error)
+        res.status(500).json({error: 'Erreur lors de la récupération des infos de l\'objet'})
+    }
+}
