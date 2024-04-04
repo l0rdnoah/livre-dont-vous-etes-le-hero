@@ -10,7 +10,7 @@ import Combat from './component/sectionCombat/Combat.jsx';
 import Inventaire from './component/Inventaire/Inventaire.jsx';
 
 function App() {
-  const [enduranceActuelle, setEnduranceActuelle] = useState(300);
+  const [enduranceActuelle, setEnduranceActuelle] = useState(25);
   const addEnduranceActuelle = (value) => {
     console.log("end :",enduranceActuelle);
     console.log("value :",value);
@@ -22,7 +22,7 @@ function App() {
       setEnduranceActuelle(enduranceActuelle+value);
     }
   };
-  const [enduranceMax, setEnduranceMax] = useState(400);
+  const [enduranceMax, setEnduranceMax] = useState(25);
   const [idSection, setIdSection] = useState('1'); // où le mec est rendu
   const [habilete, setHabilete] = useState(10);
   const [typeSection, setTypeSection] = useState("combat");
@@ -61,15 +61,16 @@ function App() {
 
     // Effectuer le fetch si l'idSection a changé
     if (id !== idSection) {
+      fetchData(id);
       setIdSection(id);
       setEnigme(searchParams.get('type_choix'));
     }
   }, [location.search, idSection]);
 
-  useEffect(() => {
-    const fetchData = async () => {
+
+    const fetchData = async (id) => {
       try {
-        const response = await fetch(`http://localhost:3200/api/section/getallinfosectionbyid?idSection=${idSection}`);
+        const response = await fetch(`http://localhost:3200/api/section/getallinfosectionbyid?idSection=${id}`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -84,9 +85,6 @@ function App() {
         setTexte("Erreur de chargement de l'histoire");
       }
     };
-  
-    fetchData();
-  }, [idSection]);
   
   useEffect(() => {
     const updateSectionPersonnage = async () => {
