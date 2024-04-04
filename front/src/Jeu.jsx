@@ -160,7 +160,6 @@ function App() {
         setRepEnigme(data[0]['section_depart_Enigmes'][0]['solution']);
         setSectionDefaiteEnigme(data[0]['section_depart_Enigmes'][0]['section_defaite']);
         setSectionVictoireEnigme(data[0]['section_depart_Enigmes'][0]['section_victoire']);
-        
       }
       setImage(data[0]['url']);
     } catch (error) {
