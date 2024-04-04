@@ -9,7 +9,7 @@ function Menu() {
       <div id="wrapper">
         <img id="logo" src={logo} alt="" />
         <div id="menu">
-          <Link to="/Jeu">Jouer</Link>
+          <Link to="/CreationPersonnage">Nouvelle partie</Link>
           <Link to="/Charger">Charger</Link>
           <a href="#">Crédits</a>
           <Link to="/">Se déconnecter</Link>
