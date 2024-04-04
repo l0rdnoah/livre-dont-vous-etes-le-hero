@@ -23,7 +23,13 @@ exports.getAllInfoSectionById= async (req, res) =>{
                 include: [
                     { 
                         model: models.Choix, 
-                        as: 'section_depart_Choixes' 
+                        as: 'section_depart_Choixes', 
+                        include: [
+                            {
+                                model: models.Condition_Choix,
+                                as: 'Condition_Choixes'
+                            }
+                        ]
                     },
                     { 
                         model: models.Combat, 
@@ -57,7 +63,13 @@ exports.getAllInfoSectionById= async (req, res) =>{
                 include: [
                     { 
                         model: models.Choix, 
-                        as: 'section_depart_Choixes' 
+                        as: 'section_depart_Choixes', 
+                        include: [
+                            {
+                                model: models.Condition_Choix,
+                                as: 'Condition_Choixes'
+                            }
+                        ] 
                     },
                     { 
                         model: models.Combat, 
@@ -86,7 +98,13 @@ exports.getAllInfoSectionById= async (req, res) =>{
                     include: [
                         { 
                             model: models.Choix, 
-                            as: 'section_depart_Choixes' 
+                            as: 'section_depart_Choixes', 
+                            include: [
+                                {
+                                    model: models.Condition_Choix,
+                                    as: 'Condition_Choixes'
+                                }
+                            ] 
                         },
                         { 
                             model: models.Combat, 
