@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 
 const cors = require('cors');
 app.use(cors({
-  origin: 'http://localhost:3100' // Autorise les requêtes de votre app React
+  origin: 'http://localhost:5173' // Autorise les requêtes de votre app React
 }));
 
 app.use(bodyParser.json())
