@@ -59,3 +59,28 @@ exports.deleteObjetFromPersonnage = async (req, res) => {
         res.status(500).json({error: 'Erreur lors de la suppression de l\'objet du personnage'})
     }
 }
+
+exports.updateObjetsForPersonnage = async (req, res) => {
+    const { idPersonnage, idsObjets } = req.body;
+
+    try {
+        
+        await models.Objet_Personnage.destroy({
+            where: {
+                id_personnage: idPersonnage
+            }
+        });
+
+        const nouvellesAssociations = idsObjets.map(idObjet => ({
+            id_personnage: idPersonnage,
+            id_objet: idObjet
+        }));
+
+        await models.Objet_Personnage.bulkCreate(nouvellesAssociations);
+
+        return res.status(200).json({ message: 'Objets mis à jour pour le personnage' });
+    } catch (error) {
+        console.log('Erreur lors de la mise à jour des objets pour le personnage: ' + error);
+        res.status(500).json({ error: 'Erreur lors de la mise à jour des objets pour le personnage' });
+    }
+};
