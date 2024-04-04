@@ -68,9 +68,9 @@ function App() {
   
   useEffect(() => {
     const updateSectionPersonnage = async () => {
-      const idUser = JSON.parse(sessionStorage.getItem('id_utilisateur'));
+      const idPersonnage = JSON.parse(sessionStorage.getItem('id_personnage'));
       try {
-        const response = await fetch(`http://localhost:3200/api/personnage/updatesectionpersonnagebyid?idPersonnage=${idUser}&idSection=${idSection}`);
+        const response = await fetch(`http://localhost:3200/api/personnage/updatesectionpersonnagebyid?idPersonnage=${idPersonnage}&idSection=${idSection}`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
