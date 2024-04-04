@@ -4,27 +4,29 @@ import { useNavigate } from 'react-router-dom';
 import { levenshtein } from '../../fonctions';
 
 function Enigme({ repEnigme, sectionVictoireEnigme, sectionDefaiteEnigme }) {
-    console.log("repEnigme",repEnigme);
-    console.log("sectionVictoireEnigme",sectionVictoireEnigme);
-    console.log("sectionDefaiteEnigme",sectionDefaiteEnigme);
     const navigate = useNavigate();
-    const [reponseUtilisateur, setReponseUtilisateur] = useState(""); // Utilisation d'un état pour stocker la réponse de l'utilisateur
+    const [reponseUtilisateur, setReponseUtilisateur] = useState("");
 
     const handleChange = (event) => {
-        setReponseUtilisateur(event.target.value.toLowerCase()); // Mettre à jour la réponse de l'utilisateur lorsqu'il change la valeur de l'input
+        setReponseUtilisateur(event.target.value.toLowerCase());
+    };
+
+    const handleKeyPress = (event) => {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            handleClick();
+        }
     };
 
     const handleClick = () => {
         if (reponseUtilisateur !== "") {
-            const distance = levenshtein(reponseUtilisateur, repEnigme); // Calculer la distance entre la réponse de l'utilisateur et la réponse de l'énigme
+            const distance = levenshtein(reponseUtilisateur, repEnigme);
             console.log(reponseUtilisateur);
             if (distance <= 3) {
                 console.log("La réponse est correcte");
-                // Redirection à la section de victoire
                 navigate(`/Jeu?idSection=${sectionVictoireEnigme}`);
             } else {
                 console.log("La réponse est incorrecte");
-                // Redirection à la section de défaite
                 navigate(`/Jeu?idSection=${sectionDefaiteEnigme}`);
             }
         } else {
@@ -35,9 +37,9 @@ function Enigme({ repEnigme, sectionVictoireEnigme, sectionDefaiteEnigme }) {
     return (
         <>  
             <div className="conteneurEnigme">
-                <form action="" className="formEnigme">
+                <form className="formEnigme">
                     <label htmlFor="reponse">Réponse :</label>
-                    <input type="text" id="reponse" name="reponse" required onChange={handleChange}></input> {/* Utilisation de onChange pour détecter les changements dans l'input */}
+                    <input type="text" id="reponse" name="reponse" required onChange={handleChange} onKeyDown={handleKeyPress} />
                 </form>
                 <button id="boutonValidation" onClick={handleClick}>Valider</button>
             </div>

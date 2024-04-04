@@ -2,13 +2,19 @@ import './charger_personnage.css';
 import { Link } from 'react-router-dom';
 import BarreEndurance from '../barre_endurance/barre_endurance';
 import PiecesOr from "../../assets/img/pieces_or.png";
+import { useNavigate } from 'react-router-dom';
 
 
 function ChargerPersonnage({personnage}) {
-    sessionStorage.setItem('id_personnage', personnage.id);
+
+
+    const charger = (id) => {
+        sessionStorage.setItem('id_personnage', id);
+    };
+
     return (
         <>  
-            <Link to={`/Jeu?idSection=${personnage.section_actuelle}`}>
+            <Link to={`/Jeu?idSection=${personnage.section_actuelle}&loading=1`} onClick={() => charger(personnage.id)}>
                 <div className='charger_personnage'>
                     <div className='container'>
                         <p>{personnage.nom}</p>
