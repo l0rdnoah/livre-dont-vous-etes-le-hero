@@ -13,13 +13,13 @@
 }
 
 .inventaire-container{
-    background-image: url("../../assets/img/wood.png");
-    background-repeat: repeat;
+    background-color: #543811;
     height: 80vh;
     width: 80%;
     max-width: 800px;
     max-height: 800px;
     margin-top: 5%;
+    border-radius: 10px;
 }
 
 .topbarre{
@@ -50,6 +50,8 @@
 
 .item{
     border-radius: 10px;
+    background-color: #6c4d21;
+    margin: 10px;
 }
 
 .item:hover{

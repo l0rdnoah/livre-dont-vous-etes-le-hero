@@ -5,68 +5,62 @@ import imgItems from "../../assets/img/itemsInventaire/item.webp";
 import PropTypes from 'prop-types';
 
 
-function Inventaire(props) {
-
-  if (props.items === undefined) {
-    var listeItems =  [
-      {
-        nom: "Elixir de Force",
-        type: "consommable",
-        modif_habilite: 3,
-        modif_endurance: 2,
-        modif_des: null,
-        modif_degats: 5,
-        image: imgItems,
-      },
-      {
-        nom: "Pierre de Sagesse",
-        type: "passif",
-        modif_habilite: 1,
-        modif_endurance: -1,
-        modif_des: 2,
-        image: imgItems,
-        modif_degats: 3,
-      },
-      {
-        nom: "Breuvage du Berserker",
-        type: "consommable",
-        modif_habilite: 2,
-        modif_endurance: 5,
-        modif_des: null,
-        image: imgItems,
-        modif_degats: 7,
-      },
-      {
-        nom: "Amulette de Protection",
-        type: "passif",
-        modif_habilite: -2,
-        modif_endurance: 3,
-        image: imgItems,
-        modif_des: 1,
-        modif_degats: 1,
-      },
-      {
-        nom: "Gantelet du Pouvoir",
-        type: "consommable",
-        modif_habilite: 4,
-        modif_endurance: -3,
-        modif_des: null,
-        image: imgItems,
-        modif_degats: 6,
-      },
-      {
-        nom: "Cape de l'Invisible",
-        type: "passif",
-        modif_habilite: 0,
-        modif_endurance: 2,
-        image: imgItems,
-        modif_des: 5,
-        modif_degats: 0,
-      },
-    ];
-  } else {
-    var listeItems = props.items;
-  }
+function Inventaire({items = [
+  {
+    nom: "Elixir de Force",
+    type: "consommable",
+    modif_habilite: 3,
+    modif_endurance: 2,
+    modif_des: null,
+    modif_degats: 5,
+    image: imgItems,
+  },
+  {
+    nom: "Pierre de Sagesse",
+    type: "passif",
+    modif_habilite: 1,
+    modif_endurance: -1,
+    modif_des: 2,
+    image: imgItems,
+    modif_degats: 3,
+  },
+  {
+    nom: "Breuvage du Berserker",
+    type: "consommable",
+    modif_habilite: 2,
+    modif_endurance: 5,
+    modif_des: null,
+    image: imgItems,
+    modif_degats: 7,
+  },
+  {
+    nom: "Amulette de Protection",
+    type: "passif",
+    modif_habilite: -2,
+    modif_endurance: 3,
+    image: imgItems,
+    modif_des: 1,
+    modif_degats: 1,
+  },
+  {
+    nom: "Gantelet du Pouvoir",
+    type: "consommable",
+    modif_habilite: 4,
+    modif_endurance: -3,
+    modif_des: null,
+    image: imgItems,
+    modif_degats: 6,
+  },
+  {
+    nom: "Cape de l'Invisible",
+    type: "passif",
+    modif_habilite: 0,
+    modif_endurance: 2,
+    image: imgItems,
+    modif_des: 5,
+    modif_degats: 0,
+  },
+]}) {
   const [inventaireOuvert, setInventaireOuvert] = useState(false);
 
   const updateInventaireOuvert = () => {
@@ -85,7 +79,7 @@ function Inventaire(props) {
 
       {/* <Menu /> */}
       <PopUpInventaire 
-      items={listeItems}
+      items={items}
       ouvert={inventaireOuvert}
       onFermer={updateInventaireOuvert}/>
       </div>
