@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
-import BarreVie from './component/barre_vie/barre_vie.jsx';
 import BarreEndurance from './component/barre_endurance/barre_endurance.jsx';
 import BoutonChoix from './component/bouton_choix/bouton_choix.jsx';
 import HistoireBoite from './component/affichage_histoire/affichage_histoire.jsx';
@@ -8,6 +7,7 @@ import Enigme from './component/enigme/enigme.jsx';
 import { useLocation } from 'react-router-dom';
 import Combat from './component/sectionCombat/Combat.jsx';
 import Inventaire from './component/Inventaire/Inventaire.jsx';
+import PiecesOr from "./assets/img/pieces_or.png";
 
 function App() {
   const [enduranceActuelle, setEnduranceActuelle] = useState(25);
@@ -24,7 +24,7 @@ function App() {
   };
   const [enduranceMax, setEnduranceMax] = useState(25);
   const [idSection, setIdSection] = useState('1'); // où le mec est rendu
-  const [habilete, setHabilete] = useState(5);
+  const [habilete, setHabilete] = useState(0);
   const [typeSection, setTypeSection] = useState("combat");
   const [pieces, setPieces] = useState(0);
   const [texte, setTexte] = useState('');
@@ -164,7 +164,7 @@ function App() {
     const updateSectionPersonnage = async () => {
       const idPersonnage = JSON.parse(sessionStorage.getItem('id_personnage'));
       try {
-        const response = await fetch(`http://localhost:3200/api/personnage/updatesectionpersonnagebyid?idPersonnage=${idPersonnage}&idSection=${idSection}`);
+        const response = await fetch(`http://localhost:3200/api/personnage/updatesectionpersonnagebyid?idPersonnage=${idPersonnage}&idSection=${idSection}&po=${pieces}&endurance=${enduranceActuelle}`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -205,9 +205,11 @@ function App() {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      setHabilete(data.habilete);
+      setHabilete(data.habilite);
+      console.log(data)
       setEnduranceActuelle(data.endurance);
       setEnduranceMax(data.endurance_max);
+      setPieces(data.po);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -247,6 +249,7 @@ function App() {
     setIdPerso(perso);
     fetchInventaire(perso);
     fetchPersonnage(perso);
+    console.log(habilete)
   }, []);
 
 
@@ -282,7 +285,14 @@ function App() {
     return (
       <>
         <div className="conteneurInfoJoueur">
-          <BarreEndurance enduranceActuelle={enduranceActuelle} enduranceMax={enduranceMax} />
+          <div className="conteneurCaracteristiques">
+            <BarreEndurance enduranceActuelle={enduranceActuelle} enduranceMax={enduranceMax} />
+            <div className='container_pieces_or'>
+              <img className='pieces_or' src={PiecesOr}/>
+              <p>{pieces}</p>
+            </div>
+            <p>Habilité : {habilete}</p>
+          </div>
           <Inventaire items={inventaire} addBonusDegat={addBonusDegat} addBonusHabilite={addBonusHabilite} addBonusDes={addBonusDes} addEndurance={addEnduranceActuelle} removeItem={removeObjet}/>
         </div>
   
@@ -298,7 +308,14 @@ function App() {
   return (
     <>
       <div className="conteneurInfoJoueur">
-        <BarreEndurance enduranceActuelle={enduranceActuelle} enduranceMax={enduranceMax} />
+        <div className="conteneurCaracteristiques">
+            <BarreEndurance enduranceActuelle={enduranceActuelle} enduranceMax={enduranceMax} />
+            <div className='container_pieces_or'>
+              <img className='pieces_or' src={PiecesOr}/>
+              <p>{pieces}</p>
+            </div>
+            <p>Habilité : {habilete}</p>
+        </div>
         <Inventaire items={inventaire} addBonusDegat={addBonusDegat} addBonusHabilite={addBonusHabilite} addBonusDes={addBonusDes} addEndurance={addEnduranceActuelle} removeItem={removeObjet}/>
       </div>
 
