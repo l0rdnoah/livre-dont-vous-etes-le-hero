@@ -13,18 +13,19 @@
 }
 
 .inventaire-container{
-    background-image: url("../../assets/img/wood.png");
-    background-repeat: repeat;
+    background-color: #333333;
     height: 80vh;
     width: 80%;
     max-width: 800px;
     max-height: 800px;
     margin-top: 5%;
+    border-radius: 10px;
 }
 
 .topbarre{
     display: grid;
     width: 100%;
+    margin-top: 15px;
     grid-template-columns: 1fr 1fr 1fr;
 }
 
@@ -35,25 +36,33 @@
     grid-column: 2;
 }
 
-.fermer{
+.fermer-container{
     grid-column: 3;
     text-align: right;
     padding-right: 10px;
     padding-top: 10px;
-    cursor: pointer;
-}
-
-.item, .img-item{
-    width: 150px;
-    height: 150px;
 }
 
 .item{
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-item{
+    width: 80%;
+    height: 80%;
+}
+.item{
     border-radius: 10px;
+    background-color: #575757;
+    margin: 10px;
 }
 
 .item:hover{
-    outline: 3px dashed #ffc31f;
+    background-color: #d1b975;
 }
 
 .items-container{
@@ -61,4 +70,10 @@
     justify-content: left;
     flex-wrap: wrap;
     margin: 50px;
+}
+
+.fermer {
+    cursor: pointer;
+    margin-right: 5px;
+    padding: 5px;
 }

@@ -26,10 +26,6 @@ module.exports = function(sequelize, DataTypes) {
     texte: {
       type: DataTypes.STRING,
       allowNull: true
-    },
-    objet_requis: {
-      type: DataTypes.STRING,
-      allowNull: true
     }
   }, {
     sequelize,

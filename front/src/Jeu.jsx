@@ -25,6 +25,9 @@ function App() {
   const [enigme,setEnigme] = useState(false);
   const [enigmeComponent, setEnigmeComponent] = useState(null); // Variable pour stocker le composant enigme
   const [allDataSection, setAllDataSection] = useState([]);
+  const [inventaire, setInventaire] = useState([]); 
+  const [idPerso, setIdPerso] = useState(0);
+  const [url,setImage] = useState('');
 
   // Utilisation du hook useLocation pour récupérer l'objet location de l'URL
   const location = useLocation();
@@ -53,6 +56,7 @@ function App() {
         setTexte(data[0]['texte']);
         setChoix(data[0]['section_depart_Choixes']);
         setEnigme(data[0]['type_choix']);
+        setImage(data[0]['url']);
       } catch (error) {
         console.error('Error fetching data:', error);
         setTexte("Erreur de chargement de l'histoire");
@@ -78,6 +82,56 @@ function App() {
 
     updateSectionPersonnage();
   }, [idSection]);
+
+  const fetchInventaire = async (perso) => {
+    try {
+      const response = await fetch(`http://localhost:3200/api/objet/${perso}/getObjetsByPersonnageId`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      setInventaire(data);
+      console.log("inventaire :");
+      console.log(data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+
+  // fonction pour ajouter un objet dans l'inventaire et mettre à jour la bdd
+  const addObjetBDD = async (idObjet) => {
+    try {
+      const response = await fetch(`http://localhost:3200/api/objetPersonnage/addObjetToPersonnage?idObjet=${idObjet}&idPersonnage=${idPerso}`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  // fonction pour enlever un objet dans l'inventaire et mettre à jour la bdd
+  const removeObjetBDD = async (idObjet) => {
+    try {
+      const response = await fetch(`http://localhost:3200/api/objetPersonnage/deleteObjetFromPersonnage?idObjet=${idObjet}&idPersonnage=${idPerso}`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  //use effect pour charger l'inventaire à partir de l'id_personnage
+  useEffect(() => {
+    const perso = (JSON.parse(sessionStorage.getItem('id_personnage')));
+    setIdPerso(perso);
+    fetchInventaire(perso);
+  }, []);
+
+
+
   // USE EFFECT POUR AFFICHER LE COMPOSANT ENIGME
   useEffect(() => {
     if (enigme === 'enigme') {
@@ -87,6 +141,23 @@ function App() {
       setEnigmeComponent(null); 
     }
   }, [enigme]);
+
+  useEffect(() => {
+    // Appliquer le style au body lors du montage du composant
+    const originalStyle = window.getComputedStyle(document.body).background;
+    document.body.style.backgroundImage = `url(${url})`;
+    document.body.style.backgroundSize = 'cover';
+    document.body.style.backgroundPosition = 'center';
+    document.body.style.backgroundRepeat = 'no-repeat';
+    document.body.style.minHeight = '100vh';
+    document.body.style.width = '100%';
+    document.body.style.margin = '0'; // Enlever la marge par défaut du body, si nécessaire
+
+    // Rétablir le style original lors du démontage du composant
+    return () => {
+      document.body.style.background = originalStyle;
+    };
+  }, [url]);
   
 
   if (enigme === 'combat') {
@@ -94,7 +165,7 @@ function App() {
       <>
         <div className="conteneurInfoJoueur">
           <BarreEndurance enduranceActuelle={enduranceActuelle} enduranceMax={enduranceMax} />
-          <Inventaire />
+          <Inventaire items={inventaire} />
         </div>
   
         <Combat modifTexte={setTexte} idCombat={allDataSection[0].Combats[0].id} enduranceJoueur={enduranceActuelle} updateEnduranceJoueur={addEnduranceActuelle}/>
@@ -110,7 +181,7 @@ function App() {
     <>
       <div className="conteneurInfoJoueur">
         <BarreEndurance enduranceActuelle={enduranceActuelle} enduranceMax={enduranceMax} />
-        <Inventaire />
+        <Inventaire items={inventaire} />
       </div>
 
       <div className="conteneurBoutons">
