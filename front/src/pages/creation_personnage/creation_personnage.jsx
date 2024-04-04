@@ -50,7 +50,7 @@ function CreationPersonnage() {
 
             if (response.ok) {
                 console.log('Personnage créé avec succès:', data);
-                navigate(`/Jeu?idSection=1&idPersonnage=${data.id}`);
+                navigate(`/Jeu?idSection=1`);
             } else {
                 console.error('Erreur lors de la création du personnage:', data);
             }
@@ -82,18 +82,18 @@ function CreationPersonnage() {
                         
                     )}
                     {section === 2 && (
-                        <div className='champ'>
-                            <Des nbdes={2} setresdes={getResDesEndurance} setBoutonEnabled={setBoutonEnabled} boutonenabled={boutonEnabled}></Des>
+                        <div className='container_des'>
                             <label>Endurance max : 20 + ({resultatDesEndurance})</label>
+                            <Des nbdes={2} setresdes={getResDesEndurance} setBoutonEnabled={setBoutonEnabled} boutonenabled={boutonEnabled} affichagefixed={false}></Des>
                             {resultatDesEndurance !== 'lancer de dés' && (
                                 <button onClick={incrementeSection}>Suivant</button>
                             )}
                         </div>
                     )}
                     {section === 3 && (
-                        <div className='champ'>
-                            <Des nbdes={1} setresdes={getResDesHabilite} setBoutonEnabled={setBoutonEnabled} boutonenabled={boutonEnabled}></Des>
+                        <div className='container_des'>
                             <label>Habilité : 3 + ({resultatDesHabilite}) </label>
+                            <Des nbdes={1} setresdes={getResDesHabilite} setBoutonEnabled={setBoutonEnabled} boutonenabled={boutonEnabled} affichagefixed={false}></Des>
                             {resultatDesHabilite !== 'lancer de dés' && (
                                 <button onClick={incrementeSection}>Suivant</button>
                             )}                        
@@ -108,9 +108,11 @@ function CreationPersonnage() {
                         </div>
                     )}
                 </form>
-                <Link to={`/Menu`}>
-                    <button>{"Retourner au menu"}</button>
-                </Link>  
+                <div className='container_bouton'>
+                    <Link to={`/Menu`}>
+                        <button>{"Retourner au menu"}</button>
+                    </Link>
+                </div>  
             </div>
         </div>
         </>
