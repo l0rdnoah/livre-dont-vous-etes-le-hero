@@ -1,0 +1,13 @@
+# Utiliser l'image officielle PostgreSQL comme base
+FROM postgres:latest
+
+LABEL maintainer="lordnoah"
+
+# Définir les variables d'environnement pour PostgreSQL
+ENV POSTGRES_USER lorenzo
+ENV POSTGRES_PASSWORD nefaissurtoutpasca
+ENV POSTGRES_DB LordOfDarkness
+
+COPY script.sql /docker-entrypoint-initdb.d/
+
+EXPOSE 5432

@@ -28,3 +28,5 @@ front/node_modules
 
 package-lock.json
 apidark.tar
+
+envDocker/img-nginx-custom/nginx-custom.tar

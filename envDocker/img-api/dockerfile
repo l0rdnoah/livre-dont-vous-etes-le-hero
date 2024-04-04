@@ -11,7 +11,7 @@ RUN npm install -g pm2
 WORKDIR /back
 
 # Copiez les fichiers de l'API dans le conteneur
-COPY ./back .
+COPY ./back .   
 
 # Installez les dépendances
 RUN npm install --force
@@ -20,4 +20,4 @@ RUN npm install --force
 CMD ["pm2-runtime", "npm", "--", "run", "dev"]
 
 # Exposez le port sur lequel l'application s'exécute
-EXPOSE 3000
+EXPOSE 3200
