@@ -156,10 +156,12 @@ function App() {
       setTexte(data[0]['texte']);
       setChoix(section_depart_Choixes);
       setEnigme(data[0]['type_choix']);
-      setRepEnigme(data[0]['section_depart_Enigmes'][0]['solution']);
-      setSectionDefaiteEnigme(data[0]['section_depart_Enigmes'][0]['section_defaite']);
-      setSectionVictoireEnigme(data[0]['section_depart_Enigmes'][0]['section_victoire']);
-      setImage(data[0]['url']);
+      if(data[0]['type_choix'] === 'enigme') {
+        setRepEnigme(data[0]['section_depart_Enigmes'][0]['solution']);
+        setSectionDefaiteEnigme(data[0]['section_depart_Enigmes'][0]['section_defaite']);
+        setSectionVictoireEnigme(data[0]['section_depart_Enigmes'][0]['section_victoire']);
+        setImage(data[0]['url']);
+      }
     } catch (error) {
       console.error('Error fetching data:', error);
       setTexte("Erreur de chargement de l'histoire");
