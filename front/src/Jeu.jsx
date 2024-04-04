@@ -27,6 +27,7 @@ function App() {
   const [allDataSection, setAllDataSection] = useState([]);
   const [inventaire, setInventaire] = useState([]); 
   const [idPerso, setIdPerso] = useState(0);
+  const [url,setImage] = useState('');
 
   // Utilisation du hook useLocation pour récupérer l'objet location de l'URL
   const location = useLocation();
@@ -55,6 +56,7 @@ function App() {
         setTexte(data[0]['texte']);
         setChoix(data[0]['section_depart_Choixes']);
         setEnigme(data[0]['type_choix']);
+        setImage(data[0]['url']);
       } catch (error) {
         console.error('Error fetching data:', error);
         setTexte("Erreur de chargement de l'histoire");
@@ -139,6 +141,23 @@ function App() {
       setEnigmeComponent(null); 
     }
   }, [enigme]);
+
+  useEffect(() => {
+    // Appliquer le style au body lors du montage du composant
+    const originalStyle = window.getComputedStyle(document.body).background;
+    document.body.style.backgroundImage = `url(${url})`;
+    document.body.style.backgroundSize = 'cover';
+    document.body.style.backgroundPosition = 'center';
+    document.body.style.backgroundRepeat = 'no-repeat';
+    document.body.style.minHeight = '100vh';
+    document.body.style.width = '100%';
+    document.body.style.margin = '0'; // Enlever la marge par défaut du body, si nécessaire
+
+    // Rétablir le style original lors du démontage du composant
+    return () => {
+      document.body.style.background = originalStyle;
+    };
+  }, [url]);
   
 
   if (enigme === 'combat') {
