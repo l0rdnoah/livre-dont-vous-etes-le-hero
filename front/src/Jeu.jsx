@@ -30,6 +30,9 @@ function App() {
   const [texte, setTexte] = useState('');
   const [choix, setChoix] = useState([]);
   const [enigme,setEnigme] = useState(false);
+  const [repEnigme,setRepEnigme] = useState("");
+  const [sectionDefaiteEnigme,setSectionDefaiteEnigme] = useState("");
+  const [sectionVictoireEnigme,setSectionVictoireEnigme] = useState("");
   const [enigmeComponent, setEnigmeComponent] = useState(null); // Variable pour stocker le composant enigme
   const [allDataSection, setAllDataSection] = useState([]);
   const [inventaire, setInventaire] = useState([]); 
@@ -153,6 +156,9 @@ function App() {
       setTexte(data[0]['texte']);
       setChoix(section_depart_Choixes);
       setEnigme(data[0]['type_choix']);
+      setRepEnigme(data[0]['section_depart_Enigmes'][0]['solution']);
+      setSectionDefaiteEnigme(data[0]['section_depart_Enigmes'][0]['section_defaite']);
+      setSectionVictoireEnigme(data[0]['section_depart_Enigmes'][0]['section_victoire']);
       setImage(data[0]['url']);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -257,7 +263,7 @@ function App() {
   // USE EFFECT POUR AFFICHER LE COMPOSANT ENIGME
   useEffect(() => {
     if (enigme === 'enigme') {
-      setEnigmeComponent(<Enigme />);
+      setEnigmeComponent(<Enigme repEnigme={repEnigme} sectionVictoireEnigme={sectionVictoireEnigme} sectionDefaiteEnigme={sectionDefaiteEnigme}/>);
     }
     else {
       setEnigmeComponent(null); 
