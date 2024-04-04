@@ -8,7 +8,7 @@ function ChargerPersonnage({personnage}) {
     sessionStorage.setItem('id_personnage', personnage.id);
     return (
         <>  
-            <Link to={`/Jeu?idSection=${personnage.section_actuelle}&idPersonnage=${personnage.id}`}>
+            <Link to={`/Jeu?idSection=${personnage.section_actuelle}`}>
                 <div className='charger_personnage'>
                     <div className='container'>
                         <p>{personnage.nom}</p>

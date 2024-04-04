@@ -50,7 +50,7 @@ function CreationPersonnage() {
 
             if (response.ok) {
                 console.log('Personnage créé avec succès:', data);
-                navigate(`/Jeu?idSection=1&idPersonnage=${data.id}`);
+                navigate(`/Jeu?idSection=1`);
             } else {
                 console.error('Erreur lors de la création du personnage:', data);
             }
