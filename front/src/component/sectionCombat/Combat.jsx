@@ -124,6 +124,7 @@ function Combat({ idCombat = 1, enduranceJoueur, updateEnduranceJoueur, modifTex
         />
 
         <div className={`conteneurBoutons ${sectionSuivante >= 1 ? '' : 'nepasafficher'}`}>
+          {sectionSuivante}
           <BoutonChoix idSection={sectionSuivante} texte="Continuer" url={sectionSuivante === -1 ? "/Menu" : undefined }/>
         </div>
         <div className={`divvide ${sectionSuivante >= 1 ? 'nepasafficher' : ''}`}></div>
