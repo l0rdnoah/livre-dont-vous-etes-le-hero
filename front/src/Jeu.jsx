@@ -134,9 +134,14 @@ function App() {
           }
 
           if (section_depart_Choixes[i]['Condition_Choixes'][0]['objet_requis']){
-            if (section_depart_Choixes[i]['Condition_Choixes'][0]['objet_requis'] === inventaire.find(inventaire.find(objet => objet.id === section_depart_Choixes[i]['Condition_Choixes'][0]['objet_requis']).nom)){
-              section_depart_Choixes[i]['respect'] = true;
+            if (inventaire.find(objet => objet.nom === section_depart_Choixes[i]['Condition_Choixes'][0]['objet_requis']) != undefined){
+              if (section_depart_Choixes[i]['Condition_Choixes'][0]['objet_requis'] === inventaire.find(objet => objet.nom === section_depart_Choixes[i]['Condition_Choixes'][0]['objet_requis']).nom){
+                section_depart_Choixes[i]['respect'] = true;
+              }else{
+                section_depart_Choixes[i]['respect'] = false;
+              }
             }else{
+              console.log("ca")
               section_depart_Choixes[i]['respect'] = false;
             }
           }
