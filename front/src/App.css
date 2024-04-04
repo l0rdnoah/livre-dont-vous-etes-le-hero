@@ -40,3 +40,19 @@ body {
     height: 100px;
     margin-right: 30px;
 }
+
+.conteneurCaracteristiques{
+    display: flex;
+    flex-direction: column;
+}
+
+.conteneurCaracteristiques p{
+    margin: 0;
+    -webkit-text-stroke: 0.6px black;
+    font-size: x-large;
+}
+
+.container_pieces_or {
+    display: flex;
+    align-items: center;
+}
