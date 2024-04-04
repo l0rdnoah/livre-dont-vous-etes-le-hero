@@ -28,6 +28,7 @@ function deroulementCombat(
   addEnduranceAdversaire,
   setTexte,
   updateLancerPossible,
+  bonusDegat
 ) {
   var enduranceAdversaireStockee = enduranceAdversaire;
   var enduranceJoueurStockee = enduranceJoueur;
@@ -35,8 +36,11 @@ function deroulementCombat(
     if (resultatDes >= condition.min_des && resultatDes <= condition.max_des) {
       updateEnduranceJoueur(0 - condition.modif_endurance);
       enduranceJoueurStockee += 0 - condition.modif_endurance;
-      enduranceAdversaireStockee += 0 - condition.degats;
-      addEnduranceAdversaire(0 - condition.degats);
+      if (condition.degats > 0) {
+        enduranceAdversaireStockee += 0 - condition.degats-bonusDegat;
+        addEnduranceAdversaire(0 - condition.degats-bonusDegat);
+        
+      }
       setTexte(condition.texte);
     }
   }
@@ -53,7 +57,7 @@ function deroulementCombat(
   }
 }
 
-function Combat({ idCombat = 1, enduranceJoueur, updateEnduranceJoueur, modifTexte }) {
+function Combat({ idCombat = 1, enduranceJoueur, updateEnduranceJoueur, modifTexte, bonusDes = 0, bonusDegat = 0}) {
   const [lancerPossible, setLancerPossible] = useState(true);
   const [resultatDes, setResultatDes] = useState(0);
   const [combatData, setCombatData] = useState({}); // Nouvel état pour stocker les données de combat
@@ -84,7 +88,7 @@ function Combat({ idCombat = 1, enduranceJoueur, updateEnduranceJoueur, modifTex
   };
 
   const updateResultatDes = async (value) => {
-    setResultatDes(value);
+    setResultatDes(value+bonusDes);
     resCombat = deroulementCombat(
         combatData[0].Condition_Combats,
         value,
@@ -93,7 +97,8 @@ function Combat({ idCombat = 1, enduranceJoueur, updateEnduranceJoueur, modifTex
         updateEnduranceJoueur,
         addEnduranceAdversaire,
         modifTexte,
-        updateLancerPossible
+        updateLancerPossible,
+        bonusDegat
       )
       if (resCombat == 1) {
         setSectionSuivante(combatData[0].section_victoire)
@@ -124,7 +129,6 @@ function Combat({ idCombat = 1, enduranceJoueur, updateEnduranceJoueur, modifTex
         />
 
         <div className={`conteneurBoutons ${sectionSuivante >= 1 ? '' : 'nepasafficher'}`}>
-          {sectionSuivante}
           <BoutonChoix idSection={sectionSuivante} texte="Continuer" url={sectionSuivante === -1 ? "/Menu" : undefined }/>
         </div>
         <div className={`divvide ${sectionSuivante >= 1 ? 'nepasafficher' : ''}`}></div>

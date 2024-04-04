@@ -182,6 +182,9 @@ function App() {
       }
     };
     updateSectionPersonnage();
+    if(idSection === "1"){
+      setEnduranceActuelle(enduranceMax)
+    }
   }, [idSection]);
 
   useEffect(() => {
@@ -304,7 +307,7 @@ function App() {
           <Inventaire items={inventaire} addBonusDegat={addBonusDegat} addBonusHabilite={addBonusHabilite} addBonusDes={addBonusDes} addEndurance={addEnduranceActuelle} removeItem={removeObjet}/>
         </div>
   
-        <Combat modifTexte={setTexte} idCombat={allDataSection[0].Combats[0].id} enduranceJoueur={enduranceActuelle} updateEnduranceJoueur={addEnduranceActuelle}/>
+        <Combat modifTexte={setTexte} idCombat={allDataSection[0].Combats[0].id} enduranceJoueur={enduranceActuelle} updateEnduranceJoueur={addEnduranceActuelle} bonusDegat={bonusDegats} bonusDes={bonusDes}/>
   
         <div className="text">
           {texte ? <HistoireBoite texte={texte} /> : <p>Loading...</p>}
