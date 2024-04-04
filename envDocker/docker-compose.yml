@@ -3,7 +3,7 @@ version: '3'
 services:
   postgres:
     build: ./img-postgre-custom
-    container_name: postgre
+    container_name: postgres
     environment:
       POSTGRES_USER: lorenzo
       POSTGRES_PASSWORD: nefaissurtoutpasca

@@ -17,7 +17,7 @@ COPY ./back .
 RUN npm install --force
 
 # Commande pour démarrer l'API avec pm2
-CMD ["pm2-runtime", "npm", "--", "run", "dev"]
+CMD ["pm2-runtime", "start", "npm", "--", "run", "dev", "--watch", "--no-daemon"]
 
 # Exposez le port sur lequel l'application s'exécute
 EXPOSE 3200
