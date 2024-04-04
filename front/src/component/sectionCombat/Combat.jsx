@@ -122,6 +122,7 @@ function Combat({ idCombat = 1, enduranceJoueur, updateEnduranceJoueur, modifTex
         />
         {/* <p>Resultat des dés: {resultatDes}</p>
         <img src={sword} alt="sword" className="sword" /> */}
+        Ennemi :
         <BarEndurance
           className="endurance-adversaire"
           enduranceMax={combatData[0].id_enemi_Enemis[0].endurance}

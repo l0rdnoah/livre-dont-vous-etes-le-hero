@@ -88,6 +88,30 @@ function App() {
     fetchPersonnage(perso);
   }, []);
 
+
+  const resetInventaire = async () => {
+    try {
+      const response = await fetch('/api/objetPersonnage/updateObjetsForPersonnage', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          idPersonnage: idPerso,
+          idsObjets: ["1", "2", "3","4"]
+        })
+      })
+      .then(fetchInventaire(idPerso))
+      .then(data => console.log(data))
+      .catch(error => console.error('Error:', error));      
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
+
   
 
 
@@ -194,6 +218,7 @@ function App() {
     }
     if(idSection === "1"){
       setEnduranceActuelle(enduranceMax)
+      //resetInventaire();
     }
   }, [idSection]);
 
