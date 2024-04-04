@@ -17,6 +17,14 @@ module.exports = function(sequelize, DataTypes) {
     url: {
       type: DataTypes.STRING,
       allowNull: true
+    },
+    objet_recup: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'Objet',
+        key: 'id'
+      }
     }
   }, {
     sequelize,

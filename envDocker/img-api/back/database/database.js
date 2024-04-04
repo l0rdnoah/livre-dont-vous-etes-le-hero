@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 
 // Initialise Sequelize avec les informations de connexion à la base de données
 const sequelize = new Sequelize('LordOfDarkness', 'lorenzo', 'nefaissurtoutpasca', {
-  host: '217.182.9.237',
+  host: 'postgres', // instance du conteneur postgres (pas localhost)
   dialect: 'postgres', // Le dialecte dépend du type de base de données que vous utilisez (mysql, postgres, sqlite, etc.)
   // autres options de configuration peuvent être ajoutées ici
 });
@@ -11,7 +11,7 @@ const sequelize = new Sequelize('LordOfDarkness', 'lorenzo', 'nefaissurtoutpasca
 sequelize
   .authenticate()
   .then(() => {
-    console.log('Connexion à la base de données établie avec succès.');
+    console.log('Connexion à la base de données établie avec succès :).');
   })
   .catch(err => {
     console.error('Impossible de se connecter à la base de données:', err);

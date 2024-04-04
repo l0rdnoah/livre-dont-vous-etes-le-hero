@@ -50,6 +50,7 @@ function CreationPersonnage() {
 
             if (response.ok) {
                 console.log('Personnage créé avec succès:', data);
+                sessionStorage.setItem('id_personnage', data.id);
                 navigate(`/Jeu?idSection=1`);
             } else {
                 console.error('Erreur lors de la création du personnage:', data);
