@@ -55,7 +55,7 @@ function App() {
   const location = useLocation();
 
   useEffect(() => {
-    // Récupérer idSection à partir de l'objet location
+    // Récupérer idSection à partir de l'objet location d
     const searchParams = new URLSearchParams(location.search);
     const id = searchParams.get('idSection');
 
