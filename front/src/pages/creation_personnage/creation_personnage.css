@@ -1,0 +1,48 @@
+.creation_personnage {
+    background-color: rgba(0, 0, 0, 0.1); /* noir avec 50% de transparence */
+    color: white;
+    width: 700px;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-bottom: 50px;
+}
+
+#wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../../assets/brume.gif');
+    background-repeat: no-repeat;
+    background-size: cover;
+    gap:50px;
+}
+  
+#logo{
+    width: 300px;
+    height: 100px;
+    margin-top: 50px;
+}
+  
+#form{
+  display: flex;
+  flex-direction: column;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 20px;
+  justify-content: stretch;
+  color: white;
+}
+
+.champ{
+  margin: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.champ input{
+    margin-left: 12px;
+    height: 25px;
+}
