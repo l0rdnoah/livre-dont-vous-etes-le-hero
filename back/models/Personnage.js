@@ -40,7 +40,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: true
     },
-    'endurance_max ': {
+    endurance_max: {
       type: DataTypes.INTEGER,
       allowNull: true
     }
