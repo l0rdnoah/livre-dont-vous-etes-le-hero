@@ -62,6 +62,22 @@ function App() {
     fetchData();
   }, [idSection]);
   
+  useEffect(() => {
+    const updateSectionPersonnage = async () => {
+      const idUser = JSON.parse(sessionStorage.getItem('id_utilisateur'));
+      try {
+        const response = await fetch(`http://localhost:3000/api/personnage/updatesectionpersonnagebyid?idPersonnage=${idUser}&idSection=${idSection}`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        console.log('Section personnage updated successfully');
+      } catch (error) {
+        console.error('Error updating section personnage:', error);
+      }
+    };
+
+    updateSectionPersonnage();
+  }, [idSection]);
   // USE EFFECT POUR AFFICHER LE COMPOSANT ENIGME
   useEffect(() => {
     if (enigme === 'enigme') {
@@ -71,6 +87,7 @@ function App() {
       setEnigmeComponent(null); 
     }
   }, [enigme]);
+  
 
   if (enigme === 'combat') {
     return (
