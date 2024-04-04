@@ -4,7 +4,7 @@ import './Des.css';
 import PropTypes from 'prop-types';
 
 
-function Des({ nbdes = 2, boutonenabled = true, setresdes, setBoutonEnabled }) {
+function Des({ nbdes = 2, boutonenabled = true, setresdes, setBoutonEnabled, affichagefixed = true }) {
 
 
     // Initialisation d'un état pour stocker les références des dés
@@ -44,7 +44,7 @@ function Des({ nbdes = 2, boutonenabled = true, setresdes, setBoutonEnabled }) {
 
 
     return (
-        <div className={`des`}>
+        <div className={affichagefixed ? 'des-fixed' : 'des-not-fixed'}>
             {diceRefs.map((ref, index) => (
                 <div key={index} className='des-unit'>
                     <Dice ref={ref} onRoll={(value) => addSomme(value)} size={100} triggers={[]} />

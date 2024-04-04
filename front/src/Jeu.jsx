@@ -25,6 +25,7 @@ function App() {
   const [enigme,setEnigme] = useState(false);
   const [enigmeComponent, setEnigmeComponent] = useState(null); // Variable pour stocker le composant enigme
   const [allDataSection, setAllDataSection] = useState([]);
+  const [inventaire, setInventaire] = useState([]); 
 
   // Utilisation du hook useLocation pour récupérer l'objet location de l'URL
   const location = useLocation();

@@ -2,13 +2,19 @@
     margin: 25px;
 }
 
-.des{
+.des-fixed{
     position: fixed;
     display: flex;
     justify-content: center;
     width: 100%;
     top : 35vh;
     left: 0;
+    align-items: center;
+}
+
+.des-not-fixed{
+    display: flex;
+    justify-content: center;
     align-items: center;
 }
 
