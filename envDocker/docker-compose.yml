@@ -3,6 +3,7 @@ version: '3'
 services:
   postgres:
     build: ./img-postgre-custom
+    restart: always
     container_name: postgres
     environment:
       POSTGRES_USER: lorenzo
@@ -17,6 +18,7 @@ services:
 
   nginx:
     build: ./img-nginx-custom
+    restart: always
     container_name: nginx
     ports:
       - "3100:80"
@@ -27,6 +29,7 @@ services:
 
   api:
     build: ./img-api
+    restart: always
     container_name: api
     ports:
       - "3200:3200"
