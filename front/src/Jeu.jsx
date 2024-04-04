@@ -10,7 +10,7 @@ import Inventaire from './component/Inventaire/Inventaire.jsx';
 import PiecesOr from "./assets/img/pieces_or.png";
 
 function App() {
-  const [enduranceActuelle, setEnduranceActuelle] = useState(25);
+  const [enduranceActuelle, setEnduranceActuelle] = useState(300);
   const addEnduranceActuelle = (value) => {
     console.log("end :",enduranceActuelle);
     console.log("value :",value);
@@ -22,7 +22,7 @@ function App() {
       setEnduranceActuelle(enduranceActuelle+value);
     }
   };
-  const [enduranceMax, setEnduranceMax] = useState(25);
+  const [enduranceMax, setEnduranceMax] = useState(0);
   const [idSection, setIdSection] = useState('1'); // où le mec est rendu
   const [habilete, setHabilete] = useState(0);
   const [typeSection, setTypeSection] = useState("combat");
@@ -80,7 +80,13 @@ function App() {
   }
 
 
-
+  //use effect pour charger l'inventaire à partir de l'id_personnage
+  useEffect(() => {
+    const perso = (JSON.parse(sessionStorage.getItem('id_personnage')));
+    setIdPerso(perso);
+    fetchInventaire(perso);
+    fetchPersonnage(perso);
+  }, []);
 
   
 
@@ -181,7 +187,11 @@ function App() {
         console.error('Error updating section personnage:', error);
       }
     };
-    updateSectionPersonnage();
+    const searchParams = new URLSearchParams(location.search);
+    const loading = searchParams.get('loading');
+    if (loading != 1){
+      updateSectionPersonnage();
+    }
   }, [idSection]);
 
   useEffect(() => {
@@ -214,7 +224,7 @@ function App() {
       }
       const data = await response.json();
       setHabilete(data.habilite);
-      console.log(data)
+      console.log(data.endurance)
       setEnduranceActuelle(data.endurance);
       setEnduranceMax(data.endurance_max);
       setPieces(data.po);
@@ -250,17 +260,6 @@ function App() {
       console.error('Error fetching data:', error);
     }
   };
-
-  //use effect pour charger l'inventaire à partir de l'id_personnage
-  useEffect(() => {
-    const perso = (JSON.parse(sessionStorage.getItem('id_personnage')));
-    setIdPerso(perso);
-    fetchInventaire(perso);
-    fetchPersonnage(perso);
-    console.log(habilete)
-  }, []);
-
-
 
   // USE EFFECT POUR AFFICHER LE COMPOSANT ENIGME
   useEffect(() => {
