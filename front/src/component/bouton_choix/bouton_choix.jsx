@@ -1,7 +1,7 @@
 import React from 'react';
 import './bouton_choix.css';
 import { Link } from 'react-router-dom';
-function BoutonChoix({ idSection, texte, respect = false }) {
+function BoutonChoix({ idSection, texte, respect = true }) {
     return (
       <>
         {respect ? (
