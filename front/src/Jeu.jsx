@@ -8,7 +8,7 @@ import { useLocation } from 'react-router-dom';
 import Combat from './component/sectionCombat/Combat.jsx';
 import Inventaire from './component/Inventaire/Inventaire.jsx';
 import PiecesOr from "./assets/img/pieces_or.png";
-
+import BoutonEco from './component/eco_bouton/eco_bouton.jsx';
 function App() {
   const [enduranceActuelle, setEnduranceActuelle] = useState(300);
   const addEnduranceActuelle = (value) => {
@@ -334,6 +334,7 @@ function App() {
             <p>Habilité : {habilete}</p>
           </div>
           <Inventaire items={inventaire} addBonusDegat={addBonusDegat} addBonusHabilite={addBonusHabilite} addBonusDes={addBonusDes} addEndurance={addEnduranceActuelle} removeItem={removeObjet}/>
+          
         </div>
   
         <Combat modifTexte={setTexte} idCombat={allDataSection[0].Combats[0].id} enduranceJoueur={enduranceActuelle} updateEnduranceJoueur={addEnduranceActuelle} bonusDegat={bonusDegats} bonusDes={bonusDes}/>
