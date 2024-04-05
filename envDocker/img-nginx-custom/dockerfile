@@ -5,6 +5,6 @@ FROM nginx:latest
 LABEL version="1.0" maintainer="Lord Noah"
 
 # On met les fichiers de prod dans le répertoire de nginx c'est comme htdocs pour xampp(explications pour ronan qui sait toujours pas coder après 3 années à l'iut)
-COPY prod /usr/share/nginx/html
+COPY prod/dist /usr/share/nginx/html
 
 EXPOSE 3100
