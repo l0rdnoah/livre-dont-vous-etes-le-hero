@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 
 // Initialise Sequelize avec les informations de connexion à la base de données
 const sequelize = new Sequelize('LordOfDarkness', 'lorenzo', 'nefaissurtoutpasca', {
-  host: '217.182.9.237',
+  host: 'postegres',
   dialect: 'postgres', // Le dialecte dépend du type de base de données que vous utilisez (mysql, postgres, sqlite, etc.)
   // autres options de configuration peuvent être ajoutées ici
 });

@@ -8,10 +8,12 @@ let models= initModels(sequelize)
 exports.updateSectionPersonnageById= async (req, res) =>{
     const idPersonnage= req.query.idPersonnage;
     const idSection= req.query.idSection;
+    const po= req.query.po;
+    const endurance= req.query.endurance;
 
     try{
         await models.Personnage.update(
-            {section_actuelle: idSection},
+            {section_actuelle: idSection,po,endurance},
             {where: {id: idPersonnage}}
     
         )
@@ -92,7 +94,7 @@ exports.getPersonnageById = async (req, res) => {
 
     try {
         const personnage = await models.Personnage.findByPk(id, {
-            attributes: { exclude: ['createdAt', 'updatedAt'] } // Excluez ou incluez des attributs selon les besoins
+            attributes: { exclude: ['createdAt', 'updatedAt'] } 
         });
 
         if (!personnage) {
@@ -105,3 +107,5 @@ exports.getPersonnageById = async (req, res) => {
         res.status(500).send('Server error');
     }
 };
+
+
