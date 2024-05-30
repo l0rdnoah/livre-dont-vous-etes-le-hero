@@ -5,6 +5,14 @@ FROM nginx:latest
 LABEL version="1.0" maintainer="Lord Noah"
 
 # On met les fichiers de prod dans le répertoire de nginx c'est comme htdocs pour xampp(explications pour ronan qui sait toujours pas coder après 3 années à l'iut)
-COPY prod/dist /usr/share/nginx/html
+# COPY prod/dist /usr/share/nginx/html
+
+RUN ls -al
+
+COPY front/dist /usr/share/nginx/html
+
+RUN mkdir /usr/share/nginx/html/img
+
+COPY envDocker/img-nginx-custom/prod/img /usr/share/nginx/html/img
 
 EXPOSE 3100

@@ -15,9 +15,20 @@ services:
       - "5432:5432"
     networks:
       - envdocker_my_network
+  
+  build_frontend:
+    image: node:22
+    container_name: build_frontend
+    working_dir: /app
+    volumes:
+      - ../front:/app
+      - ../envDocker/img-nginx-custom/prod:/dist
+    command: sh -c "npm install && npm run build && cp -r /app/dist/* /dist/"
 
   nginx:
-    build: ./img-nginx-custom
+    build: 
+      context: ../
+      dockerfile: envDocker/img-nginx-custom/dockerfile
     restart: always
     container_name: nginx
     ports:
