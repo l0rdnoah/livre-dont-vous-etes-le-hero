@@ -29,4 +29,9 @@ front/node_modules
 package-lock.json
 apidark.tar
 
+# Ignore the build directory
+envDocker/img-nginx-custom/prod/assets
+envDocker/img-nginx-custom/prod/index.html
+envDocker/img-nginx-custom/prod/vite.svg
+
 envDocker/img-nginx-custom/nginx-custom.tar

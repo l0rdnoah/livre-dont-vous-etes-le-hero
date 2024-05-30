@@ -7,12 +7,37 @@ LABEL version="1.0" maintainer="Lord Noah"
 # On met les fichiers de prod dans le répertoire de nginx c'est comme htdocs pour xampp(explications pour ronan qui sait toujours pas coder après 3 années à l'iut)
 # COPY prod/dist /usr/share/nginx/html
 
-RUN ls -al
+#COPY prod /usr/share/nginx/html
 
-COPY front/dist /usr/share/nginx/html
+#RUN mkdir /usr/share/nginx/html/img
 
-RUN mkdir /usr/share/nginx/html/img
+#COPY envDocker/img-nginx-custom/prod/img /usr/share/nginx/html/img
 
-COPY envDocker/img-nginx-custom/prod/img /usr/share/nginx/html/img
+
+# Étape 1 : Construction du front-end
+FROM node:22 as builder
+
+WORKDIR /app
+
+# Copier les fichiers package.json et package-lock.json
+COPY ../front/package*.json ./
+
+# Installer les dépendances
+RUN npm install --force
+
+# Copier le reste des fichiers du projet
+COPY ../front/ .
+
+# Builder le projet
+RUN npm run build
+
+# Étape 2 : Construire l'image nginx avec les fichiers front-end
+FROM nginx:latest
+
+# Copier les fichiers de build du front-end
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+# Copier les autres fichiers nécessaires (ex. images)
+COPY ./prod/img /usr/share/nginx/html/img
 
 EXPOSE 3100
