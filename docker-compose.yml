@@ -2,7 +2,7 @@ version: '3'
 
 services:
   postgres:
-    build: ./img-postgre-custom
+    build: ./envDocker/img-postgre-custom
     restart: always
     container_name: postgres
     environment:
@@ -15,18 +15,17 @@ services:
       - "5432:5432"
     networks:
       - envdocker_my_network
-  
+
   # build_frontend:
-  #   image: node:22
   #   container_name: build_frontend
-  #   working_dir: /app
+  #   build: ../front
   #   volumes:
   #     - ../front:/app
-  #     - ../envDocker/img-nginx-custom/prod:/dist
-  #   command: sh -c "npm install --force && npm run build && cp -r /app/dist/* /dist/"
+  #     - frontend_prod:/prod
+  #   command: sh -c "cp -r /app/dist/* /prod/ && tail -f /dev/null"
 
   nginx:
-    build: ./img-nginx-custom
+    build: ./
     restart: always
     container_name: nginx
     ports:
@@ -37,7 +36,7 @@ services:
       - envdocker_my_network
 
   api:
-    build: ../back
+    build: ./back
     restart: always
     container_name: api
     ports:
@@ -51,3 +50,4 @@ networks:
 
 volumes:
   postgres_data:
+  frontend_prod:
