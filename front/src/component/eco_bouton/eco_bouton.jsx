@@ -3,7 +3,13 @@ import React, { useState } from 'react';
 const EcoButton = () => {
     const [isOn, setIsOn] = useState(false);
 
+    useState(() => {
+        const isEco = localStorage.getItem('isEco');
+        setIsOn(isEco === 'true');
+    }, []);
+
     const handleClick = () => {
+        localStorage.setItem('isEco', !isOn);
         setIsOn(!isOn);
     };
 

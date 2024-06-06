@@ -196,7 +196,13 @@ function App() {
         setSectionDefaiteEnigme(data[0]['section_depart_Enigmes'][0]['section_defaite']);
         setSectionVictoireEnigme(data[0]['section_depart_Enigmes'][0]['section_victoire']);
       }
-      setImage(data[0]['url']);
+      if (localStorage.getItem('isEco') === 'true') {
+        let lien = data[0]['url'];
+        let position = lien.lastIndexOf('.png');
+        setImage(lien.slice(0, position) + '_lite' + lien.slice(position));
+      } else{
+        setImage(data[0]['url']);
+      }
     } catch (error) {
       console.error('Error fetching data:', error);
       setTexte("Erreur de chargement de l'histoire");
