@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap');
+
 #wrapper{
     display: flex;
     flex-direction: column;
@@ -36,6 +38,8 @@
  button {
     font-size: 25px;
     margin: 15px;
+    cursor: pointer;
+    font-family: 'Cinzel Decorative', cursive;
  }
 
  .champ input{
@@ -48,3 +52,7 @@
   text-align: center;
   justify-content: center;
  }
+
+label{
+  font-family: 'Cinzel Decorative', cursive;
+}

@@ -36,6 +36,7 @@
  button {
     font-size: 25px;
     margin: 15px;
+    cursor: pointer;
  }
 
  .champ input{

@@ -35,4 +35,8 @@
   }
   #menu :hover{
     color:#fff;
-  } 
+  }
+  
+button{
+  cursor: pointer;
+}
