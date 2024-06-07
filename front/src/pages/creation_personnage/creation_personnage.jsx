@@ -93,7 +93,7 @@ function CreationPersonnage() {
                     )}
                     {section === 3 && (
                         <div className='container_des'>
-                            <label>Habilité : 3 + ({resultatDesHabilite}) </label>
+                            <label>Habelité : 3 + ({resultatDesHabilite}) </label>
                             <Des nbdes={1} setresdes={getResDesHabilite} setBoutonEnabled={setBoutonEnabled} boutonenabled={boutonEnabled} affichagefixed={false}></Des>
                             {resultatDesHabilite !== 'lancer de dés' && (
                                 <button onClick={incrementeSection}>Suivant</button>
@@ -104,7 +104,7 @@ function CreationPersonnage() {
                         <div>
                             <p>Nom : {nom}</p>
                             <p>Endurance max : {20+resultatDesEndurance}</p>
-                            <p>Habilité : {3+resultatDesHabilite}</p>
+                            <p>Habileté : {3+resultatDesHabilite}</p>
                             <button type="submit">Créer le personnage</button>
                         </div>
                     )}

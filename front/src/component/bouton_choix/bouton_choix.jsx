@@ -6,22 +6,22 @@ function BoutonChoix({ idSection, texte, respect = true, url = undefined }) {
   if (url !== undefined) {
     return (
       <>
-      <div className="conteneurBouton">
-        <Link to={url} className="lien">
-          {texte}
-        </Link>
-      </div>
+      <Link to={url} className="lien">
+        <div className="conteneurBouton">
+            {texte}
+        </div>
+      </Link>
       </>
     );
   } else {
     return (
       <>
         {respect ? (
+        <Link to={`/Jeu?idSection=${idSection}`} className="lien">
           <div className="conteneurBouton">
-            <Link to={`/Jeu?idSection=${idSection}`} className="lien">
             {texte}
-            </Link>
           </div>
+        </Link>
         ) : (
           <div className="conteneurBoutonDesactive">
             <span>{texte}</span>

@@ -9,6 +9,8 @@ import Combat from './component/sectionCombat/Combat.jsx';
 import Inventaire from './component/Inventaire/Inventaire.jsx';
 import PiecesOr from "./assets/img/pieces_or.png";
 import BoutonEco from './component/eco_bouton/eco_bouton.jsx';
+import { Link } from 'react-router-dom';
+
 function App() {
   const [enduranceActuelle, setEnduranceActuelle] = useState(300);
   const addEnduranceActuelle = (value) => {
@@ -331,7 +333,10 @@ function App() {
               <img className='pieces_or' src={PiecesOr}/>
               <p>{pieces}</p>
             </div>
-            <p>Habilité : {habilete}</p>
+            <p>Habileté : {habilete}</p>
+            <Link to={`/Menu`}>
+              <button style={{ marginLeft: 0 }}>Retourner au menu</button>
+            </Link>     
           </div>
           <Inventaire items={inventaire} addBonusDegat={addBonusDegat} addBonusHabilite={addBonusHabilite} addBonusDes={addBonusDes} addEndurance={addEnduranceActuelle} removeItem={removeObjet}/>
           
@@ -355,7 +360,10 @@ function App() {
               <img className='pieces_or' src={PiecesOr}/>
               <p>{pieces}</p>
             </div>
-            <p>Habilité : {habilete}</p>
+            <p>Habileté : {habilete}</p>
+            <Link to={`/Menu`}>
+              <button style={{ marginLeft: 0 }}>Retourner au menu</button>
+            </Link>          
         </div>
         <Inventaire items={inventaire} addBonusDegat={addBonusDegat} addBonusHabilite={addBonusHabilite} addBonusDes={addBonusDes} addEndurance={addEnduranceActuelle} removeItem={removeObjet}/>
       </div>
