@@ -12,7 +12,7 @@ function Menu() {
         <BoutonEco/>
           <Link to="/CreationPersonnage">Nouvelle partie</Link>
           <Link to="/Charger">Charger</Link>
-          <a href="#">Crédits</a>
+          <Link to="/Credits">Crédits</Link>
           <Link to="/">Se déconnecter</Link>
         </div>
       </div>

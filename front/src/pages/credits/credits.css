@@ -1,0 +1,39 @@
+.container_credits {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  padding: 20px;
+}
+
+.part_credits {
+  text-align: center;
+  flex: 1;
+  margin: 10px;
+}
+
+.part_credits img {
+  width: 100%;
+  height: auto;
+  max-width: 150px;
+  border-radius: 50%;
+}
+
+.part_credits p {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.fake_body {
+  height: 100vh;
+  width: 100vw;
+  background-image: url('../../assets/brume.gif');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.containerMenu {
+  display: flex;
+  justify-content: center;
+}

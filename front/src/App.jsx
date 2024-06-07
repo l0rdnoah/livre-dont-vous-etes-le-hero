@@ -6,6 +6,7 @@ import Connexion from './pages/connexion/connexion.jsx';
 import Inscription from './pages/inscription/inscription.jsx';
 import Charger from './pages/charger/charger.jsx';
 import CreationPersonnage from './pages/creation_personnage/creation_personnage.jsx';
+import Credits from './pages/credits/credits.jsx';
 
 import Test from './Test.jsx';
 
@@ -20,7 +21,7 @@ function App() {
         <Route path="/Charger" element={<Charger />} />
         <Route path="/Test" element={<Test />} />
         <Route path="/CreationPersonnage" element={<CreationPersonnage />} />
-
+        <Route path="/Credits" element={<Credits />} />
         {/* Ajoutez d'autres routes si nécessaire */}
       </Routes>
     </BrowserRouter>

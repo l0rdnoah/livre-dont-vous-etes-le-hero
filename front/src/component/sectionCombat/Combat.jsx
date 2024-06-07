@@ -4,7 +4,10 @@ import Des from "../des/Des.jsx";
 import BarEndurance from "../barre_endurance/barre_endurance.jsx";
 import BoutonChoix from '../bouton_choix/bouton_choix.jsx';
 import "./Combat.css";
-import sword from "../../assets/img/combat/sword.gif";
+
+import InfligerDegats from '../infliger_degats/infliger_degats.jsx';
+import RecevoirDegats from '../recevoir_degats/recevoir_degats.jsx';
+
 import Victoire from '../victoire/victoire.jsx';
 import Defaite from '../defaite/defaite.jsx';
 
@@ -32,17 +35,26 @@ function deroulementCombat(
   updateLancerPossible,
   setShowVictoire,
   setShowDefaite,
+  setShowInfligerDegats,
+  setShowRecevoirDegats,
   bonusDegat
 ) {
+  setShowRecevoirDegats(false);
+  setShowInfligerDegats(false);
+
   var enduranceAdversaireStockee = enduranceAdversaire;
   var enduranceJoueurStockee = enduranceJoueur;
   for (var condition of conditions) {
     if (resultatDes >= condition.min_des && resultatDes <= condition.max_des) {
       updateEnduranceJoueur(0 - condition.modif_endurance);
       enduranceJoueurStockee += 0 - condition.modif_endurance;
+      if (condition.modif_endurance > 0) {
+        setShowRecevoirDegats(true);
+      }
       if (condition.degats > 0) {
         enduranceAdversaireStockee += 0 - condition.degats - bonusDegat;
         addEnduranceAdversaire(0 - condition.degats - bonusDegat);
+        setShowInfligerDegats(true);
       }
       setTexte(condition.texte);
     }
@@ -71,6 +83,8 @@ function Combat({ idCombat = 1, enduranceJoueur, updateEnduranceJoueur, modifTex
   const [sectionSuivante, setSectionSuivante] = useState(0);
   const [showVictoire, setShowVictoire] = useState(false); // Nouvel état pour afficher la victoire
   const [showDefaite, setShowDefaite] = useState(false); // Nouvel état pour afficher la defaite
+  const [showInfligerDegats, setShowInfligerDegats] = useState(false);
+  const [showRecevoirDegats, setShowRecevoirDegats] = useState(false);
 
   var resCombat = 0;
 
@@ -78,6 +92,9 @@ function Combat({ idCombat = 1, enduranceJoueur, updateEnduranceJoueur, modifTex
     setEnduranceAdversaire(
       (prevEnduranceAdversaire) => prevEnduranceAdversaire + value
     );
+    if (enduranceAdversaire < 0) {
+      setEnduranceAdversaire(0)
+    }
   }
 
   useEffect(() => {
@@ -108,6 +125,8 @@ function Combat({ idCombat = 1, enduranceJoueur, updateEnduranceJoueur, modifTex
       updateLancerPossible,
       setShowVictoire,
       setShowDefaite,
+      setShowInfligerDegats,
+      setShowRecevoirDegats,
       bonusDegat
     );
     if (resCombat === 1) {
@@ -127,6 +146,8 @@ function Combat({ idCombat = 1, enduranceJoueur, updateEnduranceJoueur, modifTex
       <>
         {showVictoire && <Victoire />}
         {showDefaite && <Defaite />}
+        {showInfligerDegats && <InfligerDegats />}
+        {showRecevoirDegats && <RecevoirDegats />}
 
         <Des
           setresdes={updateResultatDes}
