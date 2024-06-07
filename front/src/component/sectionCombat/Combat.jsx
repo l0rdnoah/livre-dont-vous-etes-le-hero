@@ -5,6 +5,8 @@ import BarEndurance from "../barre_endurance/barre_endurance.jsx";
 import BoutonChoix from '../bouton_choix/bouton_choix.jsx';
 import "./Combat.css";
 import sword from "../../assets/img/combat/sword.gif";
+import Victoire from '../victoire/victoire.jsx';
+import Defaite from '../defaite/defaite.jsx';
 
 // La fonction getCombat est maintenant purement pour récupérer les données
 async function getCombat(idCombat) {
@@ -28,6 +30,8 @@ function deroulementCombat(
   addEnduranceAdversaire,
   setTexte,
   updateLancerPossible,
+  setShowVictoire,
+  setShowDefaite,
   bonusDegat
 ) {
   var enduranceAdversaireStockee = enduranceAdversaire;
@@ -37,9 +41,8 @@ function deroulementCombat(
       updateEnduranceJoueur(0 - condition.modif_endurance);
       enduranceJoueurStockee += 0 - condition.modif_endurance;
       if (condition.degats > 0) {
-        enduranceAdversaireStockee += 0 - condition.degats-bonusDegat;
-        addEnduranceAdversaire(0 - condition.degats-bonusDegat);
-        
+        enduranceAdversaireStockee += 0 - condition.degats - bonusDegat;
+        addEnduranceAdversaire(0 - condition.degats - bonusDegat);
       }
       setTexte(condition.texte);
     }
@@ -47,23 +50,28 @@ function deroulementCombat(
   if (enduranceJoueurStockee <= 0) {
     updateLancerPossible();
     setTexte("Vous avez perdu");
+    setShowDefaite(true);
     return -1;
   } else if (enduranceAdversaireStockee <= 0) {
     updateLancerPossible();
     setTexte("Vous avez gagné");
+    setShowVictoire(true);
     return 1;
   } else {
     return 0;
   }
 }
 
-function Combat({ idCombat = 1, enduranceJoueur, updateEnduranceJoueur, modifTexte, bonusDes = 0, bonusDegat = 0}) {
+function Combat({ idCombat = 1, enduranceJoueur, updateEnduranceJoueur, modifTexte, bonusDes = 0, bonusDegat = 0 }) {
   const [lancerPossible, setLancerPossible] = useState(true);
   const [resultatDes, setResultatDes] = useState(0);
   const [combatData, setCombatData] = useState({}); // Nouvel état pour stocker les données de combat
   const [chargement, setChargement] = useState(true);
   const [enduranceAdversaire, setEnduranceAdversaire] = useState(1);
   const [sectionSuivante, setSectionSuivante] = useState(0);
+  const [showVictoire, setShowVictoire] = useState(false); // Nouvel état pour afficher la victoire
+  const [showDefaite, setShowDefaite] = useState(false); // Nouvel état pour afficher la defaite
+
   var resCombat = 0;
 
   function addEnduranceAdversaire(value) {
@@ -88,25 +96,27 @@ function Combat({ idCombat = 1, enduranceJoueur, updateEnduranceJoueur, modifTex
   };
 
   const updateResultatDes = async (value) => {
-    setResultatDes(value+bonusDes);
+    setResultatDes(value + bonusDes);
     resCombat = deroulementCombat(
-        combatData[0].Condition_Combats,
-        value,
-        enduranceAdversaire,
-        enduranceJoueur,
-        updateEnduranceJoueur,
-        addEnduranceAdversaire,
-        modifTexte,
-        updateLancerPossible,
-        bonusDegat
-      )
-      if (resCombat == 1) {
-        setSectionSuivante(combatData[0].section_victoire)
-      } else if (resCombat == -1) {
-        setSectionSuivante(1)
-      } else {
-        setSectionSuivante(0)
-      }
+      combatData[0].Condition_Combats,
+      value,
+      enduranceAdversaire,
+      enduranceJoueur,
+      updateEnduranceJoueur,
+      addEnduranceAdversaire,
+      modifTexte,
+      updateLancerPossible,
+      setShowVictoire,
+      setShowDefaite,
+      bonusDegat
+    );
+    if (resCombat === 1) {
+      setSectionSuivante(combatData[0].section_victoire);
+    } else if (resCombat === -1) {
+      setSectionSuivante(1);
+    } else {
+      setSectionSuivante(0);
+    }
   };
 
   // Le rendu du composant inclut désormais les données de combat (si nécessaire)
@@ -115,6 +125,9 @@ function Combat({ idCombat = 1, enduranceJoueur, updateEnduranceJoueur, modifTex
   } else {
     return (
       <>
+        {showVictoire && <Victoire />}
+        {showDefaite && <Defaite />}
+
         <Des
           setresdes={updateResultatDes}
           boutonenabled={lancerPossible}

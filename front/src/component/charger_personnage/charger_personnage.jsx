@@ -22,7 +22,7 @@ function ChargerPersonnage({personnage}) {
                     </div>
                     <hr></hr>
                     <div className='container'>
-                        <p>Habilité : {personnage.habilite}</p>
+                        <p>Habileté : {personnage.habilite}</p>
                         <div className='container_pieces_or'>
                             <img className='pieces_or' src={PiecesOr}/>
                             <p>{personnage.po}</p>
