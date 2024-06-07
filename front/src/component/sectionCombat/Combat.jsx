@@ -39,8 +39,6 @@ function deroulementCombat(
   setShowRecevoirDegats,
   bonusDegat
 ) {
-  setShowRecevoirDegats(false);
-  setShowInfligerDegats(false);
 
   var enduranceAdversaireStockee = enduranceAdversaire;
   var enduranceJoueurStockee = enduranceJoueur;
@@ -49,11 +47,13 @@ function deroulementCombat(
       updateEnduranceJoueur(0 - condition.modif_endurance);
       enduranceJoueurStockee += 0 - condition.modif_endurance;
       if (condition.modif_endurance > 0) {
+        setShowInfligerDegats(false);
         setShowRecevoirDegats(true);
       }
       if (condition.degats > 0) {
         enduranceAdversaireStockee += 0 - condition.degats - bonusDegat;
         addEnduranceAdversaire(0 - condition.degats - bonusDegat);
+        setShowRecevoirDegats(false);
         setShowInfligerDegats(true);
       }
       setTexte(condition.texte);
@@ -146,7 +146,7 @@ function Combat({ idCombat = 1, enduranceJoueur, updateEnduranceJoueur, modifTex
       <>
         {showVictoire && <Victoire />}
         {showDefaite && <Defaite />}
-        {showInfligerDegats && <InfligerDegats />}
+        {showInfligerDegats && <InfligerDegats  />}
         {showRecevoirDegats && <RecevoirDegats />}
 
         <Des
